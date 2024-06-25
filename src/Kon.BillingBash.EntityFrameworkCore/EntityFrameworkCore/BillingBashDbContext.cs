@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Kon.BillingBash.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -58,6 +59,10 @@ public class BillingBashDbContext :
     {
 
     }
+
+    public DbSet<Bill> Bills { get; set; }
+    public DbSet<Item> Items { get; set; }
+    public DbSet<PayItemHistory> PayItemHistories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
