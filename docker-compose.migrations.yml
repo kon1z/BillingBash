@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+
+  migrations:
+    image:  'billingbash/migrations:${TAG:-latest}'
+    container_name: dbmigrator
+    build:
+      context: .
+      dockerfile: src/Kon.BillingBash.DbMigrator/Dockerfile
+    depends_on:
+      - postgresql
+      - redis
+    environment:
+      - ConnectionStrings__Default=Host=postgresql;Port=5432;Database=BillingBash;User ID=postgres;Password=root;
+      - Redis__Configuration=redis

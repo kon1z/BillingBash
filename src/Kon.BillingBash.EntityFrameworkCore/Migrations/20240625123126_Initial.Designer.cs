@@ -13,7 +13,7 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Kon.BillingBash.Migrations
 {
     [DbContext(typeof(BillingBashDbContext))]
-    [Migration("20240625121218_Initial")]
+    [Migration("20240625123126_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
