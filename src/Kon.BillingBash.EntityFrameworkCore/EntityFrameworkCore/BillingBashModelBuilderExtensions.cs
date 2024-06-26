@@ -12,6 +12,20 @@ namespace Kon.BillingBash.EntityFrameworkCore
 				b.ToTable(BillingBashConsts.DbTablePrefix + "Bill" + BillingBashConsts.DbSchema);
 
 				b.Property(x => x.Comment).HasMaxLength(1024);
+
+				b.HasMany(x => x.Items).WithOne().HasForeignKey(x => x.BillId);
+			});
+
+			builder.Entity<Item>(b =>
+			{
+				b.ToTable(BillingBashConsts.DbTablePrefix + "Item" + BillingBashConsts.DbSchema);
+
+				b.Property(x => x.Name).HasMaxLength(64).IsRequired();
+				b.Property(x => x.Comment).HasMaxLength(1024);
+
+				b.HasMany(x => x.Payers).WithMany();
+				b.HasMany(x => x.PayItemHistories).with
+
 			});
 		}
 	}

@@ -79,6 +79,8 @@ public class BillingBashDbContext :
         builder.ConfigureFeatureManagement();
         builder.ConfigureTenantManagement();
 
+        builder.ConfigureBillManagement();
+
         /* Configure your own tables/entities inside here */
 
         //builder.Entity<YourEntity>(b =>
