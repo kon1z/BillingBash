@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Volo.Abp;
 using Volo.Abp.Domain.Entities.Auditing;
-using Volo.Abp.Identity;
 
 namespace Kon.BillingBash.Domain.Entities;
 
@@ -15,22 +14,23 @@ public class Item : FullAuditedAggregateRoot<Guid>
 	{
 	}
 
-	public Item(int price, string? comment = null)
+	public Item(string name, int price, string? comment = null)
 	{
+		Name = name;
 		Price = price;
 		Comment = comment;
 	}
 
 	public Guid? BillId { get; private set; }
 
-	public string Name { get; set; }
+	public string Name { get; internal set; }
 	/// <summary>
 	/// 单次记账的金额
 	/// </summary>
 	/// <remarks>
 	/// 1人民币=100 1.1人民币=110
 	/// </remarks>
-	public int Price { get; private set; }
+	public int Price { get; internal set; }
 	public string? Comment { get; set; }
 	public bool IsPaid { get; private set; }
 

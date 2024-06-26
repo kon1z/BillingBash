@@ -1,0 +1,63 @@
+﻿using Kon.BillingBash.Application.Dtos;
+using Kon.BillingBash.Domain.DomainServices;
+using Kon.BillingBash.Domain.Entities;
+using Kon.BillingBash.Domain.Repositories;
+using Microsoft.AspNetCore.Authorization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Volo.Abp.Application.Dtos;
+
+namespace Kon.BillingBash.Application;
+
+[Authorize]
+public class ItemAppService : BillingBashAppService, IItemAppService
+{
+	private readonly BillDomainService _billDomainService;
+	private readonly IBillRepository _billRepository;
+	private readonly IItemRepository _itemRepository;
+
+	public ItemAppService(BillDomainService billDomainService, IBillRepository billRepository, IItemRepository itemRepository)
+	{
+		_billDomainService = billDomainService;
+		_billRepository = billRepository;
+		_itemRepository = itemRepository;
+	}
+
+	public async Task<ItemDto> CreateAsync(CreateOrModifyItemInput input)
+	{
+		var item = new Item(input.Name, input.Price, input.Comment);
+
+		await _billDomainService.AddItemAsync(item);
+
+		return ObjectMapper.Map<Item, ItemDto>(item);
+	}
+
+	public async Task<ItemDto> UpdateAsync(Guid id, CreateOrModifyItemInput input)
+	{
+		var item = await _itemRepository.GetAsync(x => x.Id == id);
+		_billDomainService.UpdateItem(item, input.Name, input.Price, input.Comment);
+
+		return ObjectMapper.Map<Item, ItemDto>(item);
+	}
+
+	public async Task DeleteAsync(Guid id)
+	{
+		await _billDomainService.RemoveItemAsync(id);
+	}
+
+	public async Task<PagedResultDto<ItemDto>> GetListAsync(GetItemsInput input)
+	{
+		var queryable = await _itemRepository.GetQueryableAsync();
+		queryable = queryable.WhereIf(!input.NameFilter.IsNullOrEmpty(), x => x.Name.StartsWith(input.NameFilter!))
+			.WhereIf(input.FromDate.HasValue, x => x.CreationTime > input.FromDate)
+			.WhereIf(input.ToDate.HasValue, x => x.CreationTime < input.ToDate)
+			.PageBy(input.SkipCount, input.MaxResultCount);
+
+		var items = await AsyncExecuter.ToListAsync(queryable);
+		var totalCount = await AsyncExecuter.LongCountAsync(queryable);
+
+		return new PagedResultDto<ItemDto>(totalCount, ObjectMapper.Map<List<Item>, List<ItemDto>>(items));
+	}
+}

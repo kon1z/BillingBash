@@ -12,5 +12,5 @@ services:
       - postgresql
       - redis
     environment:
-      - ConnectionStrings__Default=Host=postgresql;Port=5432;Database=BillingBash;User ID=postgres;Password=root;
+      - ConnectionStrings__Default=Host=postgresql;Port=5432;Database=BillingBash;User ID=postgres;Password=postgres;
       - Redis__Configuration=redis
