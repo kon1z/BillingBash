@@ -25,6 +25,8 @@ namespace Kon.BillingBash.Domain.Entities
 		public bool IsPaid { get; private set; }
 		public DateTime CreationTime { get; set; }
 
+
+
 		public override object?[] GetKeys()
 		{
 			return [ItemId, UserId];
