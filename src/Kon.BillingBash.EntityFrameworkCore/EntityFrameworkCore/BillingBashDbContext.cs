@@ -60,10 +60,6 @@ public class BillingBashDbContext :
 
     }
 
-    public DbSet<Bill> Bills { get; set; }
-    public DbSet<Item> Items { get; set; }
-    public DbSet<PayItemHistory> PayItemHistories { get; set; }
-
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -78,6 +74,8 @@ public class BillingBashDbContext :
         builder.ConfigureOpenIddict();
         builder.ConfigureFeatureManagement();
         builder.ConfigureTenantManagement();
+
+        builder.ConfigureBillManagement();
 
         /* Configure your own tables/entities inside here */
 

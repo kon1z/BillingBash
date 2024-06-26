@@ -34,18 +34,11 @@ public class Item : FullAuditedAggregateRoot<Guid>
 	public string? Comment { get; set; }
 	public bool IsPaid { get; private set; }
 
-	public virtual ICollection<IdentityUser> Payers { get; } = new List<IdentityUser>();
 	public virtual ICollection<PayItemHistory> PayItemHistories { get; } = new List<PayItemHistory>();
 
 	public void Pay(Guid userId)
 	{
 		PayItemHistories.Add(new PayItemHistory(Id, userId));
-		if (PayItemHistories.Count > 0 &&
-			Payers.Count > 0 &&
-			PayItemHistories.Count == Payers.Count)
-		{
-			IsPaid = true;
-		}
 	}
 
 	public void BindBill(Guid billId)
