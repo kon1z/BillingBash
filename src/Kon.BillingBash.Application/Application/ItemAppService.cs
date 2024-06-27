@@ -11,7 +11,6 @@ using Volo.Abp.Application.Dtos;
 
 namespace Kon.BillingBash.Application;
 
-[Authorize]
 public class ItemAppService : BillingBashAppService, IItemAppService
 {
 	private readonly BillDomainService _billDomainService;
