@@ -25,6 +25,4 @@ FROM base AS final
 ENV TZ=Asia/Shanghai
 WORKDIR /app
 COPY --from=publish /app/publish .
-RUN /bin/bash -c "sed -i $'s/\r$//' entrypoint.sh"
-RUN chmod +x ./entrypoint.sh
-ENTRYPOINT ["/bin/bash", "/app/entrypoint.sh"]
+ENTRYPOINT ["/bin/bash", "./entrypoint.sh"]
