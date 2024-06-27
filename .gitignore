@@ -256,10 +256,10 @@ src/Kon.BillingBash.Web/Logs/*
 src/Kon.BillingBash.Web.Host/Logs/*
 src/Kon.BillingBash.AuthServer/Logs/*
 src/Kon.BillingBash.HttpApi.Host/Logs/*
-src/Kon.BillingBash.HttpApi.Host/Logs/*
+src/Kon.BillingBash.HttpApi.HostWithIds/Logs/*
 src/Kon.BillingBash.DbMigrator/Logs/*
 src/Kon.BillingBash.Blazor.Server/Logs/*
-src/Kon.BillingBash.Blazor.Server.Tiered/Logs/*
+src/Kon.BillingBash.Blazor/Logs/*
 
 # Use abp install-libs to restore.
 **/wwwroot/libs/*

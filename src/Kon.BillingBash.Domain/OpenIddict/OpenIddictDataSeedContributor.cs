@@ -81,23 +81,27 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
 
 
 
-        // Blazor Client
-        var blazorClientId = configurationSection["BillingBash_Blazor:ClientId"];
-        if (!blazorClientId.IsNullOrWhiteSpace())
+
+        // Blazor Server Tiered Client
+        var blazorServerTieredClientId = configurationSection["BillingBash_BlazorServerTiered:ClientId"];
+        if (!blazorServerTieredClientId.IsNullOrWhiteSpace())
         {
-            var blazorRootUrl = configurationSection["BillingBash_Blazor:RootUrl"]?.TrimEnd('/');
+            var blazorServerTieredRootUrl = configurationSection["BillingBash_BlazorServerTiered:RootUrl"]!.EnsureEndsWith('/');
 
             await CreateApplicationAsync(
-                name: blazorClientId!,
-                type: OpenIddictConstants.ClientTypes.Public,
+                name: blazorServerTieredClientId!,
+                type: OpenIddictConstants.ClientTypes.Confidential,
                 consentType: OpenIddictConstants.ConsentTypes.Implicit,
-                displayName: "Blazor Application",
-                secret: null,
-                grantTypes: new List<string> { OpenIddictConstants.GrantTypes.AuthorizationCode, },
+                displayName: "Blazor Server Application",
+                secret: configurationSection["BillingBash_BlazorServerTiered:ClientSecret"] ?? "1q2w3e*",
+                grantTypes: new List<string> //Hybrid flow
+                {
+                    OpenIddictConstants.GrantTypes.AuthorizationCode, OpenIddictConstants.GrantTypes.Implicit
+                },
                 scopes: commonScopes,
-                redirectUri: $"{blazorRootUrl}/authentication/login-callback",
-                clientUri: blazorRootUrl,
-                postLogoutRedirectUri: $"{blazorRootUrl}/authentication/logout-callback"
+                redirectUri: $"{blazorServerTieredRootUrl}signin-oidc",
+                clientUri: blazorServerTieredRootUrl,
+                postLogoutRedirectUri: $"{blazorServerTieredRootUrl}signout-callback-oidc"
             );
         }
 

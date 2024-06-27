@@ -277,6 +277,26 @@ namespace Kon.BillingBash.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AbpSessions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    SessionId = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    Device = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
+                    DeviceInfo = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: true),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ClientId = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    IpAddresses = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    SignedIn = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    LastAccessed = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AbpSessions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AbpSettingDefinitions",
                 columns: table => new
                 {
@@ -389,6 +409,29 @@ namespace Kon.BillingBash.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AbpUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppBill",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Comment = table.Column<string>(type: "character varying(1024)", maxLength: 1024, nullable: true),
+                    IsPaid = table.Column<bool>(type: "boolean", nullable: false),
+                    Owner = table.Column<Guid>(type: "uuid", nullable: false),
+                    ExtraProperties = table.Column<string>(type: "text", nullable: false),
+                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uuid", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uuid", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "uuid", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppBill", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -687,6 +730,36 @@ namespace Kon.BillingBash.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AppItem",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    BillId = table.Column<Guid>(type: "uuid", nullable: true),
+                    Name = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
+                    Price = table.Column<int>(type: "integer", nullable: false),
+                    Comment = table.Column<string>(type: "character varying(1024)", maxLength: 1024, nullable: true),
+                    IsPaid = table.Column<bool>(type: "boolean", nullable: false),
+                    ExtraProperties = table.Column<string>(type: "text", nullable: false),
+                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uuid", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uuid", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "uuid", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppItem", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppItem_AppBill_BillId",
+                        column: x => x.BillId,
+                        principalTable: "AppBill",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OpenIddictAuthorizations",
                 columns: table => new
                 {
@@ -737,6 +810,32 @@ namespace Kon.BillingBash.Migrations
                         name: "FK_AbpEntityPropertyChanges_AbpEntityChanges_EntityChangeId",
                         column: x => x.EntityChangeId,
                         principalTable: "AbpEntityChanges",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppPayItemHistory",
+                columns: table => new
+                {
+                    ItemId = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    IsPaid = table.Column<bool>(type: "boolean", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppPayItemHistory", x => new { x.ItemId, x.UserId });
+                    table.ForeignKey(
+                        name: "FK_AppPayItemHistory_AbpUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AbpUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AppPayItemHistory_AppItem_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "AppItem",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -920,6 +1019,21 @@ namespace Kon.BillingBash.Migrations
                 columns: new[] { "TenantId", "UserId" });
 
             migrationBuilder.CreateIndex(
+                name: "IX_AbpSessions_Device",
+                table: "AbpSessions",
+                column: "Device");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AbpSessions_SessionId",
+                table: "AbpSessions",
+                column: "SessionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AbpSessions_TenantId_UserId",
+                table: "AbpSessions",
+                columns: new[] { "TenantId", "UserId" });
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AbpSettingDefinitions_Name",
                 table: "AbpSettingDefinitions",
                 column: "Name",
@@ -980,6 +1094,31 @@ namespace Kon.BillingBash.Migrations
                 name: "IX_AbpUsers_UserName",
                 table: "AbpUsers",
                 column: "UserName");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppBill_CreationTime",
+                table: "AppBill",
+                column: "CreationTime");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppItem_BillId",
+                table: "AppItem",
+                column: "BillId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppItem_CreationTime",
+                table: "AppItem",
+                column: "CreationTime");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppPayItemHistory_CreationTime",
+                table: "AppPayItemHistory",
+                column: "CreationTime");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppPayItemHistory_UserId",
+                table: "AppPayItemHistory",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OpenIddictApplications_ClientId",
@@ -1058,6 +1197,9 @@ namespace Kon.BillingBash.Migrations
                 name: "AbpSecurityLogs");
 
             migrationBuilder.DropTable(
+                name: "AbpSessions");
+
+            migrationBuilder.DropTable(
                 name: "AbpSettingDefinitions");
 
             migrationBuilder.DropTable(
@@ -1085,6 +1227,9 @@ namespace Kon.BillingBash.Migrations
                 name: "AbpUserTokens");
 
             migrationBuilder.DropTable(
+                name: "AppPayItemHistory");
+
+            migrationBuilder.DropTable(
                 name: "OpenIddictScopes");
 
             migrationBuilder.DropTable(
@@ -1106,10 +1251,16 @@ namespace Kon.BillingBash.Migrations
                 name: "AbpUsers");
 
             migrationBuilder.DropTable(
+                name: "AppItem");
+
+            migrationBuilder.DropTable(
                 name: "OpenIddictAuthorizations");
 
             migrationBuilder.DropTable(
                 name: "AbpAuditLogs");
+
+            migrationBuilder.DropTable(
+                name: "AppBill");
 
             migrationBuilder.DropTable(
                 name: "OpenIddictApplications");

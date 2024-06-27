@@ -11,7 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Kon.BillingBash.EntityFrameworkCore\Kon.BillingBash.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Kon.BillingBash.Application.Tests\Kon.BillingBash.Application.Tests.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="8.1.4" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="8.2.0" />
   </ItemGroup>
 
   <ItemGroup>

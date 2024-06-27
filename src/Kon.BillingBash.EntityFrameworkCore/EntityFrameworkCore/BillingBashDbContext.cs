@@ -1,7 +1,4 @@
-﻿using System;
-using Kon.BillingBash.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -49,7 +46,7 @@ public class BillingBashDbContext :
     public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
     public DbSet<IdentityLinkUser> LinkUsers { get; set; }
     public DbSet<IdentityUserDelegation> UserDelegations { get; set; }
-
+    public DbSet<IdentitySession> Sessions { get; set; }
     // Tenant Management
     public DbSet<Tenant> Tenants { get; set; }
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
@@ -59,19 +56,7 @@ public class BillingBashDbContext :
     public BillingBashDbContext(DbContextOptions<BillingBashDbContext> options)
         : base(options)
     {
-    }
 
-    public DbSet<Item> Items { get; set; }
-    public DbSet<Bill> Bills { get; set; }
-    public DbSet<PayItemHistory> PayItemHistories { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-	    base.OnConfiguring(optionsBuilder);
-
-        optionsBuilder
-	        .LogTo(Console.WriteLine, LogLevel.Information)
-	        .EnableDetailedErrors();
     }
 
     protected override void OnModelCreating(ModelBuilder builder)

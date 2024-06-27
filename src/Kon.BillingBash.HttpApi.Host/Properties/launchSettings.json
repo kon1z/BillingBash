@@ -3,7 +3,7 @@
     "Kon.BillingBash.HttpApi.Host": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:44363",
+      "applicationUrl": "https://localhost:44358",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
