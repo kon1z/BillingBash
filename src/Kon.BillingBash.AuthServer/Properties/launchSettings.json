@@ -2,7 +2,7 @@
   "profiles": {
     "Kon.BillingBash.AuthServer": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "applicationUrl": "https://localhost:44359",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

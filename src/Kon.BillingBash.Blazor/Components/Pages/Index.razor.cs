@@ -1,29 +1,27 @@
-﻿using Kon.BillingBash.Application;
-using Kon.BillingBash.Application.Dtos;
+﻿using Kon.BillingBash.Blazor.ViewModels.Index;
+using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Volo.Abp.Application.Dtos;
 
 namespace Kon.BillingBash.Blazor.Components.Pages;
 
 public partial class Index
 {
-	private readonly IItemAppService _itemAppService;
-
-	public Index(IItemAppService itemAppService)
-	{
-		_itemAppService = itemAppService;
-	}
-
-	private PagedResultDto<ItemDto> Items { get; set; } = new(100, [new ItemDto { Name = "123" }, new ItemDto() { Name = "asd" }]);
+	private IReadOnlyList<ItemViewModel> Items { get; set; }
 	private string NameFilter { get; set; } = string.Empty;
+	public long TotalCount { get; set; }
 	private long SkipCount { get; set; }
 
-	private async Task GetListItemsAsync()
+	protected override void OnInitialized()
 	{
-		Items = await _itemAppService.GetListAsync(new GetItemsInput()
+		Items = new ItemViewModel[]
 		{
-			NameFilter = NameFilter
-		});
+			new ItemViewModel() { Name = "123", Price = 10, CreationTime = DateTime.Now },
+			new ItemViewModel() { Name = "qwe", Price = 100, CreationTime = DateTime.Now },
+		};
+	}
+
+	private void UpdateData()
+	{
+
 	}
 }

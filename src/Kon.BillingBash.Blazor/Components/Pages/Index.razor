@@ -1,48 +1,21 @@
 ﻿@page "/"
+@using Kon.BillingBash.Blazor.ViewModels.Index
 @inherits BillingBashComponentBase
 
 <div class="container">
-	@* @if (!CurrentUser.IsAuthenticated)
-	{
-	<div align="center">
-	<span class=".center">点击登录查看你的账单。</span>
-	<a class="btn btn-primary" href="/Account/Login"><i class="fa fa-sign-in"></i> @L["Login"]</a>
-	</div>
-	}*@
-	<form>
-		<label>名称</label>
-		<input @bind="NameFilter" />
-		<input type="submit" value="查询" @onclick="GetListItemsAsync" />
-	</form>
-
-	<div>
-		<table>
-			<thead>
-				<tr>
-					<th>名称</th>
-					<th>费用</th>
-					<th>记账人</th>
-					<th>参与者</th>
-					<th>记账时间</th>
-					<th>最近修改时间</th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach (var item in Items.Items)
-				{
-					<tr>
-						<td>@item.Name</td>
-						<td>@((Convert.ToDouble(item.Price) / 100).ToString("F"))</td>
-						<td>TODO</td>
-						<td>TODO</td>
-						<td>@item.CreationTime.ToString("s")</td>
-						<td>@(item.LastModificationTime.HasValue ? item.LastModificationTime.Value.ToString("s") : "-")</td>
-					</tr>
-				}
-			</tbody>
-			<tfoot>
-				<span>@($"{SkipCount}/{Items.TotalCount}")</span>
-			</tfoot>
-		</table>
-	</div>
+	<DataGrid TItem="ItemViewModel" Data="@Items">
+		<DataGridColumns>
+			<DataGridCheckColumn TItem="ItemViewModel" Field="@nameof(ItemViewModel.Selected)"></DataGridCheckColumn>
+			<DataGridColumn TItem="ItemViewModel" Field="@nameof(ItemViewModel.Name)" Caption="Name"></DataGridColumn>
+			<DataGridNumericColumn TItem="ItemViewModel" Field="@nameof(ItemViewModel.Price)" Caption="Price"></DataGridNumericColumn>
+			<DataGridDateColumn TItem="ItemViewModel" Field="@nameof(ItemViewModel.CreationTime)" Caption="CreateTime"></DataGridDateColumn>
+			<DataGridColumn Caption="Operation">
+				<DisplayTemplate>
+					<Dropdown>
+						...
+					</Dropdown>
+				</DisplayTemplate>
+			</DataGridColumn>
+		</DataGridColumns>
+	</DataGrid>
 </div>
