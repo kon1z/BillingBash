@@ -16,66 +16,88 @@ namespace Kon.BillingBash.Blazor.Menus;
 
 public class BillingBashMenuContributor : IMenuContributor
 {
-    private readonly IConfiguration _configuration;
+	private readonly IConfiguration _configuration;
 
-    public BillingBashMenuContributor(IConfiguration configuration)
-    {
-        _configuration = configuration;
-    }
+	public BillingBashMenuContributor(IConfiguration configuration)
+	{
+		_configuration = configuration;
+	}
 
-    public async Task ConfigureMenuAsync(MenuConfigurationContext context)
-    {
-        if (context.Menu.Name == StandardMenus.Main)
-        {
-            await ConfigureMainMenuAsync(context);
-        }
-        else if (context.Menu.Name == StandardMenus.User)
-        {
-            await ConfigureUserMenuAsync(context);
-        }
-    }
+	public async Task ConfigureMenuAsync(MenuConfigurationContext context)
+	{
+		if (context.Menu.Name == StandardMenus.Main)
+		{
+			await ConfigureMainMenuAsync(context);
+		}
+		else if (context.Menu.Name == StandardMenus.User)
+		{
+			await ConfigureUserMenuAsync(context);
+		}
+	}
 
-    private Task ConfigureMainMenuAsync(MenuConfigurationContext context)
-    {
-        var administration = context.Menu.GetAdministration();
-        var l = context.GetLocalizer<BillingBashResource>();
+	private Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+	{
+		var administration = context.Menu.GetAdministration();
+		var l = context.GetLocalizer<BillingBashResource>();
 
-        context.Menu.Items.Insert(
-            0,
-            new ApplicationMenuItem(
-                BillingBashMenus.Home,
-                l["Menu:Home"],
-                "/",
-                icon: "fas fa-home",
-                order: 0
-            )
-        );
+		context.Menu.Items.Insert(
+			0,
+			new ApplicationMenuItem(
+				BillingBashMenus.Home,
+				l["Menu:Home"],
+				"/",
+				icon: "fas fa-home",
+				order: 0
+				)
+			);
 
-        if (MultiTenancyConsts.IsEnabled)
-        {
-            administration.SetSubItemOrder(TenantManagementMenuNames.GroupName, 1);
-        }
-        else
-        {
-            administration.TryRemoveMenuItem(TenantManagementMenuNames.GroupName);
-        }
+		context.Menu.Items.Insert(
+			1,
+			new ApplicationMenuItem(
+				BillingBashMenus.Items,
+				l["Menu:Items"],
+				"/items",
+				"fa-bars",
+				1
+				)
+			);
 
-        administration.SetSubItemOrder(IdentityMenuNames.GroupName, 2);
-        administration.SetSubItemOrder(SettingManagementMenus.GroupName, 3);
+		context.Menu.Items.Insert(
+			2,
+			new ApplicationMenuItem(
+				BillingBashMenus.Billings,
+				l["Menu:Billings"],
+				"/billings",
+				"fa-bag-shopping",
+				2
+				)
+			);
 
-        return Task.CompletedTask;
-    }
+		if (MultiTenancyConsts.IsEnabled)
+		{
+			administration.SetSubItemOrder(TenantManagementMenuNames.GroupName, 1);
+		}
+		else
+		{
+			administration.TryRemoveMenuItem(TenantManagementMenuNames.GroupName);
+		}
 
-    private Task ConfigureUserMenuAsync(MenuConfigurationContext context)
-    {
-        var l = context.GetLocalizer<BillingBashResource>();
-        var accountStringLocalizer = context.GetLocalizer<AccountResource>();
-        var authServerUrl = _configuration["AuthServer:Authority"] ?? "";
+		administration.SetSubItemOrder(IdentityMenuNames.GroupName, 2);
+		administration.SetSubItemOrder(SettingManagementMenus.GroupName, 3);
 
-        context.Menu.AddItem(new ApplicationMenuItem("Account.Manage", accountStringLocalizer["MyAccount"],
-                $"{authServerUrl.EnsureEndsWith('/')}Account/Manage?returnUrl={_configuration["App:SelfUrl"]}", icon: "fa fa-cog", order: 1000, null, "_blank").RequireAuthenticated());
-        context.Menu.AddItem(new ApplicationMenuItem("Account.Logout", l["Logout"], url: "~/Account/Logout", icon: "fa fa-power-off", order: int.MaxValue - 1000).RequireAuthenticated());
+		return Task.CompletedTask;
+	}
 
-        return Task.CompletedTask;
-    }
+	private Task ConfigureUserMenuAsync(MenuConfigurationContext context)
+	{
+		var l = context.GetLocalizer<BillingBashResource>();
+		var accountStringLocalizer = context.GetLocalizer<AccountResource>();
+		var authServerUrl = _configuration["AuthServer:Authority"] ?? "";
+
+		context.Menu.AddItem(new ApplicationMenuItem("Account.Manage", accountStringLocalizer["MyAccount"],
+				$"{authServerUrl.EnsureEndsWith('/')}Account/Manage?returnUrl={_configuration["App:SelfUrl"]}", icon: "fa fa-cog", order: 1000, null, "_blank").RequireAuthenticated());
+		context.Menu.AddItem(new ApplicationMenuItem("Account.Logout", l["Logout"], url: "~/Account/Logout", icon: "fa fa-power-off", order: int.MaxValue - 1000).RequireAuthenticated());
+
+		return Task.CompletedTask;
+	}
 }

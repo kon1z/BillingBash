@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29020.237
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kon.BillingBash.Domain", "src\Kon.BillingBash.Domain\Kon.BillingBash.Domain.csproj", "{554AD327-6DBA-4F8F-96F8-81CE7A0C863F}"
 EndProject
@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kon.BillingBash.HttpApi.Cli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kon.BillingBash.DbMigrator", "src\Kon.BillingBash.DbMigrator\Kon.BillingBash.DbMigrator.csproj", "{AA94D832-1CCC-4715-95A9-A483F23A1A5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kon.BillingBash.Blazor", "src\Kon.BillingBash.Blazor\Kon.BillingBash.Blazor.csproj", "{C9F40C93-3DD0-4D6E-B98E-45A6F50FACDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kon.BillingBash.Blazor", "src\Kon.BillingBash.Blazor\Kon.BillingBash.Blazor.csproj", "{C9F40C93-3DD0-4D6E-B98E-45A6F50FACDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

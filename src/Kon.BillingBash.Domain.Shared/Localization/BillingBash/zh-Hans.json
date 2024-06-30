@@ -2,8 +2,14 @@
   "culture": "zh-Hans",
   "texts": {
     "Menu:Home": "首页",
+    "Menu:Items": "记账",
+    "Menu:Billings": "账单",
     "Welcome": "欢迎",
-    "LongWelcomeMessage": "欢迎使用本应用程序。这是一个基于 ABP 框架的启动项目。更多信息，请访问 abp.io。",
+    "LongWelcomeMessage": "欢迎使用账单派对多人记账系统!",
+    "Action": "操作",
+    "Detail": "详细",
+    "Modify": "修改",
+    "Delete": "删除",
     "BillingBash:010001": "不能创建空账单！",
     "BillingBash:010002": "本条记账已经绑定在{BillName}账单上了"
   }

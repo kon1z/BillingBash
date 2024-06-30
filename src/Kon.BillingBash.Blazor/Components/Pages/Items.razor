@@ -1,0 +1,29 @@
+﻿@page "/items"
+@inherits BillingBashComponentBase
+@using Kon.BillingBash.Blazor.ViewModels.Index
+
+<h3>Items</h3>
+
+<div class="container">
+	<DataGrid TItem="ItemViewModel" Data="@ItemResult">
+		<DataGridColumns>
+			<DataGridCheckColumn TItem="ItemViewModel" Field="@nameof(ItemViewModel.Selected)"></DataGridCheckColumn>
+			<DataGridColumn TItem="ItemViewModel" Field="@nameof(ItemViewModel.Name)" Caption="Name"></DataGridColumn>
+			<DataGridNumericColumn TItem="ItemViewModel" Field="@nameof(ItemViewModel.Price)" Caption="Price"></DataGridNumericColumn>
+			<DataGridDateColumn TItem="ItemViewModel" Field="@nameof(ItemViewModel.CreationTime)" Caption="CreateTime"></DataGridDateColumn>
+			<DataGridColumn Caption="Operation">
+				<DisplayTemplate>
+					<Dropdown Display="Display.InlineBlock">
+						<DropdownToggle Color="Color.Primary">@L["Action"]</DropdownToggle>
+						<DropdownMenu>
+							<DropdownItem>@L["Detail"]</DropdownItem>
+							<DropdownItem>@L["Modify"]</DropdownItem>
+							<DropdownItem TextColor="TextColor.Danger">@L["Delete"]</DropdownItem>
+						</DropdownMenu>
+					</Dropdown>
+				</DisplayTemplate>
+			</DataGridColumn>
+		</DataGridColumns>
+	</DataGrid>
+</div>
+

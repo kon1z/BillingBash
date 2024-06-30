@@ -1,21 +1,7 @@
 ﻿@page "/"
-@using Kon.BillingBash.Blazor.ViewModels.Index
 @inherits BillingBashComponentBase
 
-<div class="container">
-	<DataGrid TItem="ItemViewModel" Data="@Items">
-		<DataGridColumns>
-			<DataGridCheckColumn TItem="ItemViewModel" Field="@nameof(ItemViewModel.Selected)"></DataGridCheckColumn>
-			<DataGridColumn TItem="ItemViewModel" Field="@nameof(ItemViewModel.Name)" Caption="Name"></DataGridColumn>
-			<DataGridNumericColumn TItem="ItemViewModel" Field="@nameof(ItemViewModel.Price)" Caption="Price"></DataGridNumericColumn>
-			<DataGridDateColumn TItem="ItemViewModel" Field="@nameof(ItemViewModel.CreationTime)" Caption="CreateTime"></DataGridDateColumn>
-			<DataGridColumn Caption="Operation">
-				<DisplayTemplate>
-					<Dropdown>
-						...
-					</Dropdown>
-				</DisplayTemplate>
-			</DataGridColumn>
-		</DataGridColumns>
-	</DataGrid>
-</div>
+<h3>@L["Welcome"]</h3>
+<h4>@L["LongWelcomeMessage"] @(!CurrentUser.IsAuthenticated ? "登录开始使用记账系统。" : "")
+	<a hidden="@(CurrentUser.IsAuthenticated)" abp-button="Primary" href="~/Account/Login"><i class="fa fa-sign-in"></i> @L["Login"]</a>
+</h4>
