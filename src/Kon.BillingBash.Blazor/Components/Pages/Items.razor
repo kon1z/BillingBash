@@ -1,11 +1,12 @@
 ﻿@page "/items"
 @inherits BillingBashComponentBase
 @using Kon.BillingBash.Blazor.ViewModels.Index
+@using Microsoft.AspNetCore.Razor.TagHelpers
 
 <h3>Items</h3>
 
 <div class="container">
-	<DataGrid TItem="ItemViewModel" Data="@ItemResult">
+	<DataGrid TItem="ItemViewModel" Data="@ItemResult" Responsive>
 		<DataGridColumns>
 			<DataGridCheckColumn TItem="ItemViewModel" Field="@nameof(ItemViewModel.Selected)"></DataGridCheckColumn>
 			<DataGridColumn TItem="ItemViewModel" Field="@nameof(ItemViewModel.Name)" Caption="Name"></DataGridColumn>
@@ -25,5 +26,7 @@
 			</DataGridColumn>
 		</DataGridColumns>
 	</DataGrid>
+	<Button Color="Color.Primary" Block Clicked="async ()=> await PageAsync()" Disabled="@(!CanPage)">Next</Button>
+	<span style="display: inline-block; float: right;">TotalCount: @TotalCount </span>
 </div>
 

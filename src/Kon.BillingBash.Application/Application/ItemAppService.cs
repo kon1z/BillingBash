@@ -51,10 +51,9 @@ public class ItemAppService : BillingBashAppService, IItemAppService
 		var queryable = await _itemRepository.GetQueryableAsync();
 		queryable = queryable.WhereIf(!input.NameFilter.IsNullOrEmpty(), x => x.Name.StartsWith(input.NameFilter!))
 			.WhereIf(input.FromDate.HasValue, x => x.CreationTime > input.FromDate)
-			.WhereIf(input.ToDate.HasValue, x => x.CreationTime < input.ToDate)
-			.PageBy(input.SkipCount, input.MaxResultCount);
+			.WhereIf(input.ToDate.HasValue, x => x.CreationTime < input.ToDate);
 
-		var items = await AsyncExecuter.ToListAsync(queryable);
+		var items = await AsyncExecuter.ToListAsync(queryable.PageBy(input.SkipCount, input.MaxResultCount));
 		var totalCount = await AsyncExecuter.LongCountAsync(queryable);
 
 		return new PagedResultDto<ItemDto>(totalCount, ObjectMapper.Map<List<Item>, List<ItemDto>>(items));

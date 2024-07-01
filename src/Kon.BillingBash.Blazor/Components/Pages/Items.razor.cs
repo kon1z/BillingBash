@@ -17,24 +17,36 @@ namespace Kon.BillingBash.Blazor.Components.Pages
 			_itemAppService = itemAppService;
 		}
 
-		private IReadOnlyList<ItemViewModel> ItemResult { get; set; } = null!;
+		private List<ItemViewModel> ItemResult { get; set; } = new();
 		private string NameFilter { get; set; } = string.Empty;
-		public long TotalCount { get; set; }
-		private long SkipCount { get; set; }
+		private long TotalCount { get; set; }
+		private int PageSize { get; set; } = 1;
+		private int CurrentPage { get; set; } = 1;
+		private bool CanPage => PageSize * CurrentPage < TotalCount;
+
 
 		protected override async Task OnInitializedAsync()
 		{
-			var queryResult = await _itemAppService.GetListAsync(new GetItemsInput()
-			{
-			});
-
-			ItemResult = ObjectMapper.Map<IReadOnlyList<ItemDto>, List<ItemViewModel>>(queryResult.Items);
-			TotalCount = queryResult.TotalCount;
+			await QueryItemsAsync();
+			await base.OnInitializedAsync();
 		}
 
-		private void UpdateData()
+		private async Task PageAsync()
 		{
+			await QueryItemsAsync();
+			CurrentPage++;
+		}
 
+		private async Task QueryItemsAsync()
+		{
+			var queryResult = await _itemAppService.GetListAsync(new GetItemsInput()
+			{
+				SkipCount = PageSize * CurrentPage,
+				MaxResultCount = PageSize
+			});
+
+			ItemResult.AddRange(ObjectMapper.Map<IReadOnlyList<ItemDto>, List<ItemViewModel>>(queryResult.Items));
+			TotalCount = queryResult.TotalCount;
 		}
 	}
 }
