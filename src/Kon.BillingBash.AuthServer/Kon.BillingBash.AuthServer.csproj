@@ -46,7 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
-		<PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="8.2.0" />
+		<ProjectReference Include="..\..\packages\Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic\Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.csproj" />
 
   </ItemGroup>
 

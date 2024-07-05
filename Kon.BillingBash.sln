@@ -5,6 +5,10 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kon.BillingBash.Domain", "src\Kon.BillingBash.Domain\Kon.BillingBash.Domain.csproj", "{554AD327-6DBA-4F8F-96F8-81CE7A0C863F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic", "packages\Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic\Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.csproj", "{58D438B2-C805-483B-A05E-B1780210908A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volo.Abp.AspNetCore.Components.Server.BasicTheme", "packages\Volo.Abp.AspNetCore.Components.Server.BasicTheme\Volo.Abp.AspNetCore.Components.Server.BasicTheme.csproj", "{2D226879-D9E6-4229-874E-867CC1010164}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kon.BillingBash.Application", "src\Kon.BillingBash.Application\Kon.BillingBash.Application.csproj", "{1A94A50E-06DC-43C1-80B5-B662820EC3EB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kon.BillingBash.EntityFrameworkCore", "src\Kon.BillingBash.EntityFrameworkCore\Kon.BillingBash.EntityFrameworkCore.csproj", "{C956DD76-69C8-4A9C-83EA-D17DF83340FD}"
@@ -39,6 +43,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kon.BillingBash.DbMigrator"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kon.BillingBash.Blazor", "src\Kon.BillingBash.Blazor\Kon.BillingBash.Blazor.csproj", "{C9F40C93-3DD0-4D6E-B98E-45A6F50FACDA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "packages", "packages", "{41E77644-F651-44FC-9FC0-5D5E9DFC2055}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +55,14 @@ Global
 		{554AD327-6DBA-4F8F-96F8-81CE7A0C863F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{554AD327-6DBA-4F8F-96F8-81CE7A0C863F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{554AD327-6DBA-4F8F-96F8-81CE7A0C863F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58D438B2-C805-483B-A05E-B1780210908A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58D438B2-C805-483B-A05E-B1780210908A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58D438B2-C805-483B-A05E-B1780210908A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58D438B2-C805-483B-A05E-B1780210908A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D226879-D9E6-4229-874E-867CC1010164}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D226879-D9E6-4229-874E-867CC1010164}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D226879-D9E6-4229-874E-867CC1010164}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D226879-D9E6-4229-874E-867CC1010164}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1A94A50E-06DC-43C1-80B5-B662820EC3EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1A94A50E-06DC-43C1-80B5-B662820EC3EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A94A50E-06DC-43C1-80B5-B662820EC3EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -115,6 +129,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{554AD327-6DBA-4F8F-96F8-81CE7A0C863F} = {CA9AC87F-097E-4F15-8393-4BC07735A5B0}
+		{58D438B2-C805-483B-A05E-B1780210908A} = {41E77644-F651-44FC-9FC0-5D5E9DFC2055}
+		{2D226879-D9E6-4229-874E-867CC1010164} = {41E77644-F651-44FC-9FC0-5D5E9DFC2055}
 		{1A94A50E-06DC-43C1-80B5-B662820EC3EB} = {CA9AC87F-097E-4F15-8393-4BC07735A5B0}
 		{C956DD76-69C8-4A9C-83EA-D17DF83340FD} = {CA9AC87F-097E-4F15-8393-4BC07735A5B0}
 		{50B2631D-129C-47B3-A587-029CCD6099BC} = {04DBDB01-70F4-4E06-B468-8F87850B22BE}
