@@ -8,7 +8,7 @@
 	<Fields>
 		<Field>
 			<FieldLabel>账单名称</FieldLabel>
-			<TextEdit @bind-Text="NameFilter"/>
+			<TextEdit @bind-Text="NameFilter" />
 		</Field>
 		<Field>
 			<FieldLabel>账单日期区间</FieldLabel>
@@ -19,12 +19,13 @@
 </div>
 
 <div class="container">
-	<DataGrid TItem="ItemViewModel" Data="@ItemResult" Responsive>
+	<DataGrid TItem="ItemViewModel" Data="@ItemResult" PageSize="int.MaxValue" Responsive>
 		<DataGridColumns>
 			<DataGridCheckColumn TItem="ItemViewModel" Field="@nameof(ItemViewModel.Selected)"></DataGridCheckColumn>
 			<DataGridColumn TItem="ItemViewModel" Field="@nameof(ItemViewModel.Name)" Caption="Name"></DataGridColumn>
-			<DataGridNumericColumn TItem="ItemViewModel" Field="@nameof(ItemViewModel.Price)" Caption="Price"></DataGridNumericColumn>
+			<DataGridNumericColumn TItem="ItemViewModel" Field="@nameof(ItemViewModel.Price)" DisplayFormat="{0:C}" Caption="Price"></DataGridNumericColumn>
 			<DataGridDateColumn TItem="ItemViewModel" Field="@nameof(ItemViewModel.CreationTime)" Caption="CreateTime"></DataGridDateColumn>
+			<DataGridColumn TItem="ItemViewModel" Field="@nameof(ItemViewModel.CreatorId)" Caption="Creator"></DataGridColumn>
 			<DataGridColumn Caption="Operation">
 				<DisplayTemplate>
 					<Dropdown Display="Display.InlineBlock">
@@ -43,17 +44,21 @@
 	<span style="display: inline-block; float: right;">TotalCount: @TotalCount </span>
 </div>
 
-						
+
 <div class="container">
 	<Fields>
 		<Field>
 			<FieldLabel>账单名称</FieldLabel>
-			<TextEdit @bind-Text="CreateInput.Name"/>
+			<TextEdit @bind-Text="CreateInput.Name" />
 		</Field>
 		<Field>
 			<FieldLabel>金额</FieldLabel>
-			<InputMask Mask="99999-99" @bind-Text="CreateInput.Price"/>
+			<NumericEdit TValue="decimal" Min="decimal.Zero" @bind-Value="@CreateInput.Price" />
+		</Field>
+		<Field>
+			<FieldLabel>参与人</FieldLabel>
+			<Select TValue="string"></Select>
 		</Field>
 	</Fields>
-	<Button Color="Color.Primary" @onclick="CommitAsync">新增</Button>
+	<Button Color="Color.Primary" @onclick="SubmitAsync">新增</Button>
 </div>
