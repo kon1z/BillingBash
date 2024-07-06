@@ -1,9 +1,22 @@
 ﻿@page "/items"
 @inherits BillingBashComponentBase
 @using Kon.BillingBash.Blazor.ViewModels.Index
-@using Microsoft.AspNetCore.Razor.TagHelpers
 
 <h3>Items</h3>
+
+<div class="container">
+	<Fields>
+		<Field>
+			<FieldLabel>账单名称</FieldLabel>
+			<TextEdit @bind-Text="NameFilter"/>
+		</Field>
+		<Field>
+			<FieldLabel>账单日期区间</FieldLabel>
+			<DatePicker TValue="DateTime?" @bind-Dates="SelectedDates" InputMode="DateInputMode.Date" SelectionMode="DateInputSelectionMode.Range" />
+		</Field>
+	</Fields>
+	<Button Color="Color.Primary" @onclick="SearchAsync">查询</Button>
+</div>
 
 <div class="container">
 	<DataGrid TItem="ItemViewModel" Data="@ItemResult" Responsive>
@@ -26,7 +39,21 @@
 			</DataGridColumn>
 		</DataGridColumns>
 	</DataGrid>
-	<Button Color="Color.Primary" Block Clicked="async ()=> await PageAsync()" Disabled="@(!CanPage)">Next</Button>
+	<Button Color="Color.Primary" Block Clicked="PageAsync" Disabled="@(!CanPage)">Next</Button>
 	<span style="display: inline-block; float: right;">TotalCount: @TotalCount </span>
 </div>
 
+						
+<div class="container">
+	<Fields>
+		<Field>
+			<FieldLabel>账单名称</FieldLabel>
+			<TextEdit @bind-Text="CreateInput.Name"/>
+		</Field>
+		<Field>
+			<FieldLabel>金额</FieldLabel>
+			<InputMask Mask="99999-99" @bind-Text="CreateInput.Price"/>
+		</Field>
+	</Fields>
+	<Button Color="Color.Primary" @onclick="CommitAsync">新增</Button>
+</div>

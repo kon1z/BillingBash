@@ -27,7 +27,7 @@ public class BillDomainService : DomainService
 		await _itemRepository.InsertAsync(item);
 	}
 
-	public void UpdateItem(Item item, string name, int price, string? comment)
+	public void UpdateItem(Item item, string name, decimal price, string? comment)
 	{
 		item.Name = name;
 		item.Price = price;

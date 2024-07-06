@@ -27,7 +27,7 @@ public class Bill : FullAuditedAggregateRoot<Guid>
 	/// </summary>
 	public Guid Owner { get; private set; }
 
-	public int TotalPrice => Items.Sum(x => x.Price);
+	public decimal TotalPrice => Items.Sum(x => x.Price);
 
 	public virtual ICollection<Item> Items { get; } = new List<Item>();
 

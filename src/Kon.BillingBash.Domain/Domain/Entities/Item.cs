@@ -14,7 +14,7 @@ public class Item : FullAuditedAggregateRoot<Guid>
 	{
 	}
 
-	public Item(string name, int price, string? comment = null)
+	public Item(string name, decimal price, string? comment = null)
 	{
 		Name = name;
 		Price = price;
@@ -24,13 +24,7 @@ public class Item : FullAuditedAggregateRoot<Guid>
 	public Guid? BillId { get; private set; }
 
 	public string Name { get; internal set; }
-	/// <summary>
-	/// 单次记账的金额
-	/// </summary>
-	/// <remarks>
-	/// 1人民币=100 1.1人民币=110
-	/// </remarks>
-	public int Price { get; internal set; }
+	public decimal Price { get; internal set; }
 	public string? Comment { get; set; }
 	public bool IsPaid { get; private set; }
 

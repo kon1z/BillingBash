@@ -27,6 +27,7 @@ public static class BillingBashModelBuilderExtensions
 			b.ConfigureByConvention();
 
 			b.Property(x => x.Name).HasMaxLength(64).IsRequired();
+			b.Property(x => x.Price).HasColumnType("decimal(9,2)");
 			b.Property(x => x.Comment).HasMaxLength(1024);
 
 			b.HasMany<IdentityUser>().WithMany()
