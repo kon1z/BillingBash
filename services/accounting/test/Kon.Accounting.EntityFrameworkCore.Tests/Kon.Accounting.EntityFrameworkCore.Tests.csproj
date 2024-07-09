@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Kon.Accounting</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Kon.Accounting.EntityFrameworkCore\Kon.Accounting.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\src\Kon.Accounting.EntityFrameworkCore\Kon.Accounting.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Kon.Accounting.Application.Tests\Kon.Accounting.Application.Tests.csproj" />
+    <ProjectReference Include="..\Kon.Accounting.Application.Tests\Kon.Accounting.Application.Tests.csproj" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="8.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+  </ItemGroup>
+
+</Project>

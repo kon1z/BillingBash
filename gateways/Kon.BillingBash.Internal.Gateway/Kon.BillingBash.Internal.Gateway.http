@@ -1,0 +1,6 @@
+@Kon.BillingBash.Internal.Gateway_HostAddress = http://localhost:5266
+
+GET {{Kon.BillingBash.Internal.Gateway_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

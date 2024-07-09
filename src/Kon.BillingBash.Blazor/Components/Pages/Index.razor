@@ -1,7 +1,0 @@
-﻿@page "/"
-@inherits BillingBashComponentBase
-
-<h3>@L["Welcome"]</h3>
-<h4>@L["LongWelcomeMessage"] @(!CurrentUser.IsAuthenticated ? "登录开始使用记账系统。" : "")
-	<a hidden="@(CurrentUser.IsAuthenticated)" abp-button="Primary" href="~/Account/Login"><i class="fa fa-sign-in"></i> @L["Login"]</a>
-</h4>
