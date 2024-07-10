@@ -1,11 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Volo.Abp.Application.Services;
-using Volo.Abp.Identity;
+﻿using Volo.Abp.Application.Services;
 
 namespace Kon.AccountingService.Application.ApplicationServices;
 
 public interface IPartyAppService : IApplicationService
 {
-	Task<List<IdentityUserDto>> GetUsersAsync();
 }

@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Kon.AccountingService.Application.Dtos;
+﻿using Kon.AccountingService.Application.Dtos;
 using Kon.AccountingService.Domain.DomainServices;
 using Kon.AccountingService.Domain.Entities;
 using Kon.AccountingService.Domain.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.Application.Services;
 
 namespace Kon.AccountingService.Application.ApplicationServices;
 
-public class ItemAppService : AccountingServiceAppService, IItemAppService
+public class ItemAppService : ApplicationService, IItemAppService
 {
     private readonly BillDomainService _billDomainService;
     private readonly IBillRepository _billRepository;

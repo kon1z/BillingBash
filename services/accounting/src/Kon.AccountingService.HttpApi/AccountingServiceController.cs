@@ -1,7 +1,7 @@
 ﻿using Kon.AccountingService.Localization;
 using Volo.Abp.AspNetCore.Mvc;
 
-namespace Kon.AccountingService.Controllers;
+namespace Kon.AccountingService;
 
 /* Inherit your controllers from this class.
  */
