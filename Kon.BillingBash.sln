@@ -41,7 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kon.BillingBash.Shared.Host
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kon.BillingBash.Shared.Localization", "shared\Kon.BillingBash.Shared.Localization\Kon.BillingBash.Shared.Localization.csproj", "{FC1938B4-3669-46CC-97A1-796D29FF263D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kon.BillingBash.Shared.Hosting.Microservices", "shared\Kon.BilllingBash.Shared.Hosting.Microservices\Kon.BillingBash.Shared.Hosting.Microservices.csproj", "{92135597-00AA-4EA2-8C8A-39F67C9F4B50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kon.BillingBash.Shared.Hosting.Microservices", "shared\Kon.BillingBash.Shared.Hosting.Microservices\Kon.BillingBash.Shared.Hosting.Microservices.csproj", "{9EA401C8-6164-4D57-B61B-478441FBEEC9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,10 +105,10 @@ Global
 		{FC1938B4-3669-46CC-97A1-796D29FF263D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC1938B4-3669-46CC-97A1-796D29FF263D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC1938B4-3669-46CC-97A1-796D29FF263D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{92135597-00AA-4EA2-8C8A-39F67C9F4B50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{92135597-00AA-4EA2-8C8A-39F67C9F4B50}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{92135597-00AA-4EA2-8C8A-39F67C9F4B50}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{92135597-00AA-4EA2-8C8A-39F67C9F4B50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EA401C8-6164-4D57-B61B-478441FBEEC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EA401C8-6164-4D57-B61B-478441FBEEC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EA401C8-6164-4D57-B61B-478441FBEEC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EA401C8-6164-4D57-B61B-478441FBEEC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -128,7 +128,7 @@ Global
 		{01A2EB5D-EA36-40A3-BB44-C2D3AE8E5000} = {2FCCD7E8-1AC4-418C-B210-298DCD345180}
 		{9B49E12B-1095-4AA5-B0CE-8E0B84E0EE2C} = {2FCCD7E8-1AC4-418C-B210-298DCD345180}
 		{FC1938B4-3669-46CC-97A1-796D29FF263D} = {2FCCD7E8-1AC4-418C-B210-298DCD345180}
-		{92135597-00AA-4EA2-8C8A-39F67C9F4B50} = {2FCCD7E8-1AC4-418C-B210-298DCD345180}
+		{9EA401C8-6164-4D57-B61B-478441FBEEC9} = {2FCCD7E8-1AC4-418C-B210-298DCD345180}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28315BFD-90E7-4E14-A2EA-F3D23AF4126F}

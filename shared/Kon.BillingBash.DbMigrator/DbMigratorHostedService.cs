@@ -1,10 +1,9 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Kon.BillingBash.Data;
 using Serilog;
+using System.Threading;
+using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Data;
 
@@ -33,10 +32,10 @@ public class DbMigratorHostedService : IHostedService
         {
             await application.InitializeAsync();
 
-            await application
-                .ServiceProvider
-                .GetRequiredService<BillingBashDbMigrationService>()
-                .MigrateAsync();
+            //await application
+            //    .ServiceProvider
+            //    .GetRequiredService<BillingBashDbMigrationService>()
+            //    .MigrateAsync();
 
             await application.ShutdownAsync();
 

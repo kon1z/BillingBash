@@ -4,30 +4,19 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <RootNamespace>Kon.AccountingService</RootNamespace>
     <PreserveCompilationReferences>true</PreserveCompilationReferences>
-    <UserSecretsId>Kon.AccountingService-4681b4fd-151f-4221-84a4-929d86723e4c</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
-    <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="8.0.4" />
-    <PackageReference Include="DistributedLock.Redis" Version="1.0.2" />
-    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="7.5.1" />
-    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.5.1" />
-    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="7.5.1" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" Version="8.2.0" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="8.2.0" />
-    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="8.2.0" />
-    <PackageReference Include="Volo.Abp.DistributedLocking" Version="8.2.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.2.0" />
-    <PackageReference Include="Volo.Abp.Swashbuckle" Version="8.2.0" />
+	  <PackageReference Include="Keycloak.Net.Core" Version="1.0.22" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.5">
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\shared\Kon.BillingBash.Shared.Hosting.Microservices\Kon.BillingBash.Shared.Hosting.Microservices.csproj" />
     <ProjectReference Include="..\Kon.AccountingService.Application\Kon.AccountingService.Application.csproj" />
     <ProjectReference Include="..\Kon.AccountingService.EntityFrameworkCore\Kon.AccountingService.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Kon.AccountingService.HttpApi\Kon.AccountingService.HttpApi.csproj" />

@@ -1,5 +1,4 @@
-﻿using Kon.BillingBash.EntityFrameworkCore;
-using Volo.Abp.Autofac;
+﻿using Volo.Abp.Autofac;
 using Volo.Abp.Caching;
 using Volo.Abp.Caching.StackExchangeRedis;
 using Volo.Abp.Modularity;
@@ -8,9 +7,7 @@ namespace Kon.BillingBash.DbMigrator;
 
 [DependsOn(
     typeof(AbpAutofacModule),
-    typeof(AbpCachingStackExchangeRedisModule),
-    typeof(BillingBashEntityFrameworkCoreModule),
-    typeof(BillingBashApplicationContractsModule)
+    typeof(AbpCachingStackExchangeRedisModule)
     )]
 public class BillingBashDbMigratorModule : AbpModule
 {

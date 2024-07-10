@@ -1,217 +1,113 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Medallion.Threading;
-using Medallion.Threading.Redis;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Kon.AccountingService.DbMigrations;
+using Kon.AccountingService.EntityFrameworkCore;
+using Kon.BillingBash.Shared.Hosting.AspNetCore;
+using Kon.BillingBash.Shared.Hosting.Microservices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Kon.AccountingService.EntityFrameworkCore;
-using Kon.AccountingService.MultiTenancy;
-using StackExchange.Redis;
-using Microsoft.OpenApi.Models;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
-using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
-using Volo.Abp.AspNetCore.Serilog;
-using Volo.Abp.Autofac;
-using Volo.Abp.Caching;
-using Volo.Abp.Caching.StackExchangeRedis;
-using Volo.Abp.DistributedLocking;
-using Volo.Abp.Identity;
-using Volo.Abp.Localization;
+using Volo.Abp.AspNetCore.Mvc.AntiForgery;
 using Volo.Abp.Modularity;
-using Volo.Abp.Security.Claims;
-using Volo.Abp.Swashbuckle;
-using Volo.Abp.VirtualFileSystem;
 
 namespace Kon.AccountingService;
 
 [DependsOn(
-    typeof(AccountingServiceHttpApiModule),
-    typeof(AbpAutofacModule),
-    typeof(AbpCachingStackExchangeRedisModule),
-    typeof(AbpDistributedLockingModule),
-    typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
-    typeof(AccountingServiceApplicationModule),
-    typeof(AccountingServiceEntityFrameworkCoreModule),
-    typeof(AbpAspNetCoreSerilogModule),
-    typeof(AbpSwashbuckleModule)
+	typeof(BillingBashSharedHostingMicroservicesModule),
+	typeof(AccountingServiceApplicationModule),
+	typeof(AccountingServiceHttpApiModule),
+	typeof(AccountingServiceEntityFrameworkCoreModule)
 )]
 public class AccountingServiceHttpApiHostModule : AbpModule
 {
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        var configuration = context.Services.GetConfiguration();
-        var hostingEnvironment = context.Services.GetHostingEnvironment();
+	public override void ConfigureServices(ServiceConfigurationContext context)
+	{
+		var configuration = context.Services.GetConfiguration();
 
-        ConfigureConventionalControllers();
-        ConfigureAuthentication(context, configuration);
-        ConfigureCache(configuration);
-        ConfigureVirtualFileSystem(context);
-        ConfigureDataProtection(context, configuration, hostingEnvironment);
-        ConfigureDistributedLocking(context, configuration);
-        ConfigureCors(context, configuration);
-        ConfigureSwaggerServices(context, configuration);
-    }
+		JwtBearerConfigurationHelper.Configure(context, "AccountingService");
 
-    private void ConfigureCache(IConfiguration configuration)
-    {
-        Configure<AbpDistributedCacheOptions>(options => { options.KeyPrefix = "AccountingService:"; });
-    }
+		SwaggerConfigurationHelper.ConfigureWithOidc(
+			context: context,
+			authority: configuration["AuthServer:Authority"]!,
+			scopes: ["AccountingService"],
+			discoveryEndpoint: configuration["AuthServer:MetadataAddress"],
+			apiTitle: "Accounting Service API"
+		);
 
-    private void ConfigureVirtualFileSystem(ServiceConfigurationContext context)
-    {
-        var hostingEnvironment = context.Services.GetHostingEnvironment();
+		context.Services.AddCors(options =>
+		{
+			options.AddDefaultPolicy(builder =>
+			{
+				builder
+					.WithOrigins(
+						configuration["App:CorsOrigins"]!
+							.Split(",", StringSplitOptions.RemoveEmptyEntries)
+							.Select(o => o.Trim().RemovePostFix("/"))
+							.ToArray()
+					)
+					.WithAbpExposedHeaders()
+					.SetIsOriginAllowedToAllowWildcardSubdomains()
+					.AllowAnyHeader()
+					.AllowAnyMethod()
+					.AllowCredentials();
+			});
+		});
 
-        if (hostingEnvironment.IsDevelopment())
-        {
-            Configure<AbpVirtualFileSystemOptions>(options =>
-            {
-                options.FileSets.ReplaceEmbeddedByPhysical<AccountingServiceDomainSharedModule>(
-                    Path.Combine(hostingEnvironment.ContentRootPath,
-                        $"..{Path.DirectorySeparatorChar}Kon.AccountingService.Domain.Shared"));
-                options.FileSets.ReplaceEmbeddedByPhysical<AccountingServiceDomainModule>(
-                    Path.Combine(hostingEnvironment.ContentRootPath,
-                        $"..{Path.DirectorySeparatorChar}Kon.AccountingService.Domain"));
-                options.FileSets.ReplaceEmbeddedByPhysical<AccountingServiceApplicationContractsModule>(
-                    Path.Combine(hostingEnvironment.ContentRootPath,
-                        $"..{Path.DirectorySeparatorChar}Kon.AccountingService.Application.Contracts"));
-                options.FileSets.ReplaceEmbeddedByPhysical<AccountingServiceApplicationModule>(
-                    Path.Combine(hostingEnvironment.ContentRootPath,
-                        $"..{Path.DirectorySeparatorChar}Kon.AccountingService.Application"));
-            });
-        }
-    }
+		Configure<AbpAspNetCoreMvcOptions>(options =>
+		{
+			options.ConventionalControllers.Create(typeof(AccountingServiceApplicationModule).Assembly, opts =>
+			{
+				opts.RootPath = "accounting";
+				opts.RemoteServiceName = "accounting";
+			});
+		});
 
-    private void ConfigureConventionalControllers()
-    {
-        Configure<AbpAspNetCoreMvcOptions>(options =>
-        {
-            options.ConventionalControllers.Create(typeof(AccountingServiceApplicationModule).Assembly);
-        });
-    }
+		Configure<AbpAntiForgeryOptions>(options =>
+		{
+			options.AutoValidate = false;
+		});
+	}
 
-    private void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
-    {
-        context.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
-            {
-                options.Authority = configuration["AuthServer:Authority"];
-                options.RequireHttpsMetadata = configuration.GetValue<bool>("AuthServer:RequireHttpsMetadata");
-                options.Audience = "AccountingService";
-            });
+	public override void OnApplicationInitialization(ApplicationInitializationContext context)
+	{
+		var app = context.GetApplicationBuilder();
+		var env = context.GetEnvironment();
 
-        context.Services.Configure<AbpClaimsPrincipalFactoryOptions>(options =>
-        {
-            options.IsDynamicClaimsEnabled = true;
-        });
-    }
+		if (env.IsDevelopment())
+		{
+			app.UseDeveloperExceptionPage();
+		}
 
-    private static void ConfigureSwaggerServices(ServiceConfigurationContext context, IConfiguration configuration)
-    {
-        context.Services.AddAbpSwaggerGenWithOAuth(
-            configuration["AuthServer:Authority"]!,
-            new Dictionary<string, string>
-            {
-                    {"AccountingService", "AccountingService API"}
-            },
-            options =>
-            {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "AccountingService API", Version = "v1" });
-                options.DocInclusionPredicate((docName, description) => true);
-                options.CustomSchemaIds(type => type.FullName);
-            });
-    }
+		app.UseCorrelationId();
+		app.UseCors();
+		app.UseAbpRequestLocalization();
+		app.UseStaticFiles();
+		app.UseRouting();
+		app.UseAuthentication();
+		app.UseAbpClaimsMap();
+		app.UseAuthorization();
+		app.UseSwagger();
+		app.UseAbpSwaggerWithCustomScriptUI(options =>
+		{
+			var configuration = context.ServiceProvider.GetRequiredService<IConfiguration>();
+			options.SwaggerEndpoint("/swagger/v1/swagger.json", "Accounting Service API");
+			options.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
+		});
+		app.UseAbpSerilogEnrichers();
+		app.UseAuditing();
+		app.UseUnitOfWork();
+		app.UseConfiguredEndpoints();
+	}
+	public override async Task OnPostApplicationInitializationAsync(ApplicationInitializationContext context)
+	{
+		await context.ServiceProvider
+			.GetRequiredService<AccountingServiceDatabaseMigrationChecker>()
+			.CheckAndApplyDatabaseMigrationsAsync();
+	}
 
-    private void ConfigureDataProtection(
-        ServiceConfigurationContext context,
-        IConfiguration configuration,
-        IWebHostEnvironment hostingEnvironment)
-    {
-        var dataProtectionBuilder = context.Services.AddDataProtection().SetApplicationName("AccountingService");
-        if (!hostingEnvironment.IsDevelopment())
-        {
-            var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]!);
-            dataProtectionBuilder.PersistKeysToStackExchangeRedis(redis, "AccountingService-Protection-Keys");
-        }
-    }
-
-    private void ConfigureDistributedLocking(
-        ServiceConfigurationContext context,
-        IConfiguration configuration)
-    {
-        context.Services.AddSingleton<IDistributedLockProvider>(sp =>
-        {
-            var connection = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]!);
-            return new RedisDistributedSynchronizationProvider(connection.GetDatabase());
-        });
-    }
-
-    private void ConfigureCors(ServiceConfigurationContext context, IConfiguration configuration)
-    {
-        context.Services.AddCors(options =>
-        {
-            options.AddDefaultPolicy(builder =>
-            {
-                builder
-                    .WithOrigins(configuration["App:CorsOrigins"]?
-                        .Split(",", StringSplitOptions.RemoveEmptyEntries)
-                        .Select(o => o.RemovePostFix("/"))
-                        .ToArray() ?? Array.Empty<string>())
-                    .WithAbpExposedHeaders()
-                    .SetIsOriginAllowedToAllowWildcardSubdomains()
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials();
-            });
-        });
-    }
-
-    public override void OnApplicationInitialization(ApplicationInitializationContext context)
-    {
-        var app = context.GetApplicationBuilder();
-        var env = context.GetEnvironment();
-
-        if (env.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
-        }
-
-        app.UseAbpRequestLocalization();
-        app.UseCorrelationId();
-        app.UseStaticFiles();
-        app.UseRouting();
-        app.UseCors();
-        app.UseAuthentication();
-
-        if (MultiTenancyConsts.IsEnabled)
-        {
-            app.UseMultiTenancy();
-        }
-
-        app.UseUnitOfWork();
-        app.UseDynamicClaims();
-        app.UseAuthorization();
-
-        app.UseSwagger();
-        app.UseAbpSwaggerUI(options =>
-        {
-            options.SwaggerEndpoint("/swagger/v1/swagger.json", "AccountingService API");
-
-            var configuration = context.GetConfiguration();
-            options.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
-            options.OAuthScopes("AccountingService");
-        });
-
-        app.UseAuditing();
-        app.UseAbpSerilogEnrichers();
-        app.UseConfiguredEndpoints();
-    }
 }
