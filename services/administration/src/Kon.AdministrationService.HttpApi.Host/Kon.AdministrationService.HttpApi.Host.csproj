@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <Import Project="..\..\common.props" />
 
@@ -11,26 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
-    <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="8.0.4" />
-    <PackageReference Include="DistributedLock.Redis" Version="1.0.2" />
-    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="7.5.1" />
-    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.5.1" />
-    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="7.5.1" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" Version="8.2.0" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="8.2.0" />
-    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="8.2.0" />
-    <PackageReference Include="Volo.Abp.DistributedLocking" Version="8.2.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.2.0" />
-    <PackageReference Include="Volo.Abp.Swashbuckle" Version="8.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Kon.AdministrationService.Application\Kon.AdministrationService.Application.csproj" />
-    <ProjectReference Include="..\Kon.AdministrationService.EntityFrameworkCore\Kon.AdministrationService.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\Kon.AdministrationService.HttpApi\Kon.AdministrationService.HttpApi.csproj" />
+	  <PackageReference Include="Keycloak.Net.Core" Version="1.0.22" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.5">
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +22,12 @@
     <Content Remove="Logs\**" />
     <EmbeddedResource Remove="Logs\**" />
     <None Remove="Logs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\shared\Kon.BillingBash.Shared.Hosting.Microservices\Kon.BillingBash.Shared.Hosting.Microservices.csproj" />
+    <ProjectReference Include="..\Kon.AdministrationService.Application\Kon.AdministrationService.Application.csproj" />
+    <ProjectReference Include="..\Kon.AdministrationService.HttpApi\Kon.AdministrationService.HttpApi.csproj" />
   </ItemGroup>
 
 </Project>

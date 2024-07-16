@@ -1,0 +1,387 @@
+2024-07-12 14:37:53.295 +08:00 [INF] Starting Kon.AccountingService.HttpApi.Host.
+2024-07-12 14:37:56.524 +08:00 [INF] Loaded ABP modules:
+2024-07-12 14:37:56.525 +08:00 [INF] - Kon.AccountingService.AccountingServiceHttpApiHostModule
+2024-07-12 14:37:56.525 +08:00 [INF]   - Kon.BillingBash.Shared.Hosting.Microservices.BillingBashSharedHostingMicroservicesModule
+2024-07-12 14:37:56.525 +08:00 [INF]     - Kon.BillingBash.Shared.Hosting.AspNetCore.BillingBashSharedHostingAspNetCoreModule
+2024-07-12 14:37:56.525 +08:00 [INF]       - Kon.BillingBash.Shared.Hosting.BillingBashSharedHostingModule
+2024-07-12 14:37:56.525 +08:00 [INF]         - Volo.Abp.Autofac.AbpAutofacModule
+2024-07-12 14:37:56.525 +08:00 [INF]           - Volo.Abp.Castle.AbpCastleCoreModule
+2024-07-12 14:37:56.525 +08:00 [INF]         - Volo.Abp.Data.AbpDataModule
+2024-07-12 14:37:56.525 +08:00 [INF]           - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2024-07-12 14:37:56.525 +08:00 [INF]             - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2024-07-12 14:37:56.525 +08:00 [INF]             - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2024-07-12 14:37:56.525 +08:00 [INF]           - Volo.Abp.Uow.AbpUnitOfWorkModule
+2024-07-12 14:37:56.525 +08:00 [INF]           - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2024-07-12 14:37:56.525 +08:00 [INF]       - Kon.BillingBash.Shared.Localization.BillingBashSharedLocalizationModule
+2024-07-12 14:37:56.525 +08:00 [INF]         - Volo.Abp.Validation.AbpValidationModule
+2024-07-12 14:37:56.525 +08:00 [INF]           - Volo.Abp.Localization.AbpLocalizationModule
+2024-07-12 14:37:56.525 +08:00 [INF]             - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2024-07-12 14:37:56.525 +08:00 [INF]             - Volo.Abp.Settings.AbpSettingsModule
+2024-07-12 14:37:56.525 +08:00 [INF]               - Volo.Abp.Security.AbpSecurityModule
+2024-07-12 14:37:56.526 +08:00 [INF]             - Volo.Abp.Threading.AbpThreadingModule
+2024-07-12 14:37:56.526 +08:00 [INF]       - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2024-07-12 14:37:56.526 +08:00 [INF]         - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.MultiTenancy.AbpMultiTenancyAbstractionsModule
+2024-07-12 14:37:56.526 +08:00 [INF]         - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.Auditing.AbpAuditingModule
+2024-07-12 14:37:56.526 +08:00 [INF]             - Volo.Abp.Json.AbpJsonModule
+2024-07-12 14:37:56.526 +08:00 [INF]               - Volo.Abp.Json.SystemTextJson.AbpJsonSystemTextJsonModule
+2024-07-12 14:37:56.526 +08:00 [INF]                 - Volo.Abp.Json.AbpJsonAbstractionsModule
+2024-07-12 14:37:56.526 +08:00 [INF]                 - Volo.Abp.Timing.AbpTimingModule
+2024-07-12 14:37:56.526 +08:00 [INF]             - Volo.Abp.Auditing.AbpAuditingContractsModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.Http.AbpHttpModule
+2024-07-12 14:37:56.526 +08:00 [INF]             - Volo.Abp.Http.AbpHttpAbstractionsModule
+2024-07-12 14:37:56.526 +08:00 [INF]             - Volo.Abp.Minify.AbpMinifyModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.Authorization.AbpAuthorizationModule
+2024-07-12 14:37:56.526 +08:00 [INF]             - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.AspNetCore.AbpAspNetCoreAbstractionsModule
+2024-07-12 14:37:56.526 +08:00 [INF]       - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2024-07-12 14:37:56.526 +08:00 [INF]         - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2024-07-12 14:37:56.526 +08:00 [INF]             - Volo.Abp.Application.AbpDddApplicationContractsModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2024-07-12 14:37:56.526 +08:00 [INF]             - Volo.Abp.UI.AbpUiModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.Application.AbpDddApplicationModule
+2024-07-12 14:37:56.526 +08:00 [INF]             - Volo.Abp.Domain.AbpDddDomainModule
+2024-07-12 14:37:56.526 +08:00 [INF]               - Volo.Abp.EventBus.AbpEventBusModule
+2024-07-12 14:37:56.526 +08:00 [INF]                 - Volo.Abp.Guids.AbpGuidsModule
+2024-07-12 14:37:56.526 +08:00 [INF]                 - Volo.Abp.BackgroundWorkers.AbpBackgroundWorkersModule
+2024-07-12 14:37:56.526 +08:00 [INF]                 - Volo.Abp.DistributedLocking.AbpDistributedLockingAbstractionsModule
+2024-07-12 14:37:56.526 +08:00 [INF]               - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2024-07-12 14:37:56.526 +08:00 [INF]               - Volo.Abp.Specifications.AbpSpecificationsModule
+2024-07-12 14:37:56.526 +08:00 [INF]               - Volo.Abp.Caching.AbpCachingModule
+2024-07-12 14:37:56.526 +08:00 [INF]                 - Volo.Abp.Serialization.AbpSerializationModule
+2024-07-12 14:37:56.526 +08:00 [INF]               - Volo.Abp.Domain.AbpDddDomainSharedModule
+2024-07-12 14:37:56.526 +08:00 [INF]             - Volo.Abp.Features.AbpFeaturesModule
+2024-07-12 14:37:56.526 +08:00 [INF]     - Kon.AdministrationService.EntityFrameworkCore.AdministrationServiceEntityFrameworkCoreModule
+2024-07-12 14:37:56.526 +08:00 [INF]       - Kon.AdministrationService.AdministrationServiceDomainModule
+2024-07-12 14:37:56.526 +08:00 [INF]         - Kon.AdministrationService.AdministrationServiceDomainSharedModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainSharedModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainSharedModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.Identity.AbpIdentityDomainSharedModule
+2024-07-12 14:37:56.526 +08:00 [INF]             - Volo.Abp.Users.AbpUsersDomainSharedModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.OpenIddict.AbpOpenIddictDomainSharedModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainSharedModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.SettingManagement.AbpSettingManagementDomainSharedModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.TenantManagement.AbpTenantManagementDomainSharedModule
+2024-07-12 14:37:56.526 +08:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2024-07-12 14:37:56.526 +08:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.BackgroundJobs.AbpBackgroundJobsModule
+2024-07-12 14:37:56.526 +08:00 [INF]             - Volo.Abp.BackgroundJobs.AbpBackgroundJobsAbstractionsModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.AutoMapper.AbpAutoMapperModule
+2024-07-12 14:37:56.526 +08:00 [INF]         - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainModule
+2024-07-12 14:37:56.526 +08:00 [INF]         - Volo.Abp.Identity.AbpIdentityDomainModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.Users.AbpUsersDomainModule
+2024-07-12 14:37:56.526 +08:00 [INF]             - Volo.Abp.Users.AbpUsersAbstractionModule
+2024-07-12 14:37:56.526 +08:00 [INF]         - Volo.Abp.OpenIddict.AbpOpenIddictDomainModule
+2024-07-12 14:37:56.526 +08:00 [INF]         - Volo.Abp.PermissionManagement.OpenIddict.AbpPermissionManagementDomainOpenIddictModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainModule
+2024-07-12 14:37:56.526 +08:00 [INF]         - Volo.Abp.PermissionManagement.Identity.AbpPermissionManagementDomainIdentityModule
+2024-07-12 14:37:56.526 +08:00 [INF]         - Volo.Abp.SettingManagement.AbpSettingManagementDomainModule
+2024-07-12 14:37:56.526 +08:00 [INF]         - Volo.Abp.TenantManagement.AbpTenantManagementDomainModule
+2024-07-12 14:37:56.526 +08:00 [INF]         - Volo.Abp.Emailing.AbpEmailingModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.TextTemplating.AbpTextTemplatingModule
+2024-07-12 14:37:56.526 +08:00 [INF]             - Volo.Abp.TextTemplating.Scriban.AbpTextTemplatingScribanModule
+2024-07-12 14:37:56.526 +08:00 [INF]               - Volo.Abp.TextTemplating.AbpTextTemplatingCoreModule
+2024-07-12 14:37:56.526 +08:00 [INF]       - Volo.Abp.Identity.EntityFrameworkCore.AbpIdentityEntityFrameworkCoreModule
+2024-07-12 14:37:56.526 +08:00 [INF]         - Volo.Abp.Users.EntityFrameworkCore.AbpUsersEntityFrameworkCoreModule
+2024-07-12 14:37:56.526 +08:00 [INF]           - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2024-07-12 14:37:56.526 +08:00 [INF]       - Volo.Abp.OpenIddict.EntityFrameworkCore.AbpOpenIddictEntityFrameworkCoreModule
+2024-07-12 14:37:56.526 +08:00 [INF]       - Volo.Abp.PermissionManagement.EntityFrameworkCore.AbpPermissionManagementEntityFrameworkCoreModule
+2024-07-12 14:37:56.526 +08:00 [INF]       - Volo.Abp.SettingManagement.EntityFrameworkCore.AbpSettingManagementEntityFrameworkCoreModule
+2024-07-12 14:37:56.526 +08:00 [INF]       - Volo.Abp.EntityFrameworkCore.PostgreSql.AbpEntityFrameworkCorePostgreSqlModule
+2024-07-12 14:37:56.526 +08:00 [INF]       - Volo.Abp.BackgroundJobs.EntityFrameworkCore.AbpBackgroundJobsEntityFrameworkCoreModule
+2024-07-12 14:37:56.526 +08:00 [INF]       - Volo.Abp.AuditLogging.EntityFrameworkCore.AbpAuditLoggingEntityFrameworkCoreModule
+2024-07-12 14:37:56.526 +08:00 [INF]       - Volo.Abp.TenantManagement.EntityFrameworkCore.AbpTenantManagementEntityFrameworkCoreModule
+2024-07-12 14:37:56.526 +08:00 [INF]       - Volo.Abp.FeatureManagement.EntityFrameworkCore.AbpFeatureManagementEntityFrameworkCoreModule
+2024-07-12 14:37:56.526 +08:00 [INF]     - Volo.Abp.BackgroundJobs.RabbitMQ.AbpBackgroundJobsRabbitMqModule
+2024-07-12 14:37:56.526 +08:00 [INF]       - Volo.Abp.RabbitMQ.AbpRabbitMqModule
+2024-07-12 14:37:56.526 +08:00 [INF]     - Volo.Abp.AspNetCore.Authentication.JwtBearer.AbpAspNetCoreAuthenticationJwtBearerModule
+2024-07-12 14:37:56.526 +08:00 [INF]     - Volo.Abp.EventBus.RabbitMq.AbpEventBusRabbitMqModule
+2024-07-12 14:37:56.526 +08:00 [INF]     - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2024-07-12 14:37:56.526 +08:00 [INF]     - Volo.Abp.DistributedLocking.AbpDistributedLockingModule
+2024-07-12 14:37:56.526 +08:00 [INF]   - Kon.AccountingService.AccountingServiceApplicationModule
+2024-07-12 14:37:56.526 +08:00 [INF]     - Kon.AccountingService.AccountingServiceDomainModule
+2024-07-12 14:37:56.526 +08:00 [INF]       - Kon.AccountingService.AccountingServiceDomainSharedModule
+2024-07-12 14:37:56.526 +08:00 [INF]     - Kon.AccountingService.AccountingServiceApplicationContractsModule
+2024-07-12 14:37:56.526 +08:00 [INF]   - Kon.AccountingService.AccountingServiceHttpApiModule
+2024-07-12 14:37:56.526 +08:00 [INF]   - Kon.AccountingService.EntityFrameworkCore.AccountingServiceEntityFrameworkCoreModule
+2024-07-12 14:37:56.634 +08:00 [DBG] Started background worker: Volo.Abp.BackgroundJobs.BackgroundJobWorker
+2024-07-12 14:37:56.645 +08:00 [DBG] Started background worker: Volo.Abp.OpenIddict.Tokens.TokenCleanupBackgroundWorker
+2024-07-12 14:37:56.922 +08:00 [DBG] RabbitMQ Queue 'AbpBackgroundJobs.Volo.Abp.Emailing.BackgroundEmailSendingJobArgs' has 0 messages and 0 consumers.
+2024-07-12 14:37:57.026 +08:00 [WRN] Value cannot be null. (Parameter 'chars')
+System.ArgumentNullException: Value cannot be null. (Parameter 'chars')
+   at System.Text.UTF8Encoding.GetByteCount(String chars)
+   at RabbitMQ.Client.Framing.Impl.ExchangeDeclare.GetRequiredBufferSize()
+   at RabbitMQ.Client.Impl.OutgoingCommand.GetMaxSize(Int32 maxPayloadBytes)
+   at RabbitMQ.Client.Impl.OutgoingCommand.Transmit(UInt16 channelNumber, Connection connection)
+   at RabbitMQ.Client.Impl.SessionBase.Transmit(OutgoingCommand& cmd)
+   at RabbitMQ.Client.Impl.ModelBase.TransmitAndEnqueue(OutgoingCommand& cmd, IRpcContinuation k)
+   at RabbitMQ.Client.Impl.ModelBase.ModelRpc(MethodBase method, ContentHeaderBase header, Byte[] body)
+   at RabbitMQ.Client.Framing.Impl.Model._Private_ExchangeDeclare(String exchange, String type, Boolean passive, Boolean durable, Boolean autoDelete, Boolean internal, Boolean nowait, IDictionary`2 arguments)
+   at RabbitMQ.Client.Impl.ModelBase.ExchangeDeclare(String exchange, String type, Boolean durable, Boolean autoDelete, IDictionary`2 arguments)
+   at RabbitMQ.Client.Impl.AutorecoveringModel.ExchangeDeclare(String exchange, String type, Boolean durable, Boolean autoDelete, IDictionary`2 arguments)
+   at Volo.Abp.RabbitMQ.RabbitMqMessageConsumer.TryCreateChannelAsync()
+2024-07-12 14:37:57.029 +08:00 [WRN] Object reference not set to an instance of an object.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at RabbitMQ.Client.Impl.RecordedBinding.GetHashCode()
+   at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at RabbitMQ.Client.Framing.Impl.AutorecoveringConnection.RecordBinding(RecordedBinding rb)
+   at RabbitMQ.Client.Impl.AutorecoveringModel.QueueBind(String queue, String exchange, String routingKey, IDictionary`2 arguments)
+   at RabbitMQ.Client.IModelExensions.QueueBind(IModel model, String queue, String exchange, String routingKey, IDictionary`2 arguments)
+   at Volo.Abp.RabbitMQ.RabbitMqMessageConsumer.TrySendQueueBindCommandsAsync()
+2024-07-12 14:37:57.056 +08:00 [WRN] Object reference not set to an instance of an object.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at RabbitMQ.Client.Impl.RecordedBinding.GetHashCode()
+   at System.Collections.Generic.Dictionary`2.FindValue(TKey key)
+   at System.Collections.Generic.Dictionary`2.ContainsKey(TKey key)
+   at RabbitMQ.Client.Framing.Impl.AutorecoveringConnection.RecordBinding(RecordedBinding rb)
+   at RabbitMQ.Client.Impl.AutorecoveringModel.QueueBind(String queue, String exchange, String routingKey, IDictionary`2 arguments)
+   at RabbitMQ.Client.IModelExensions.QueueBind(IModel model, String queue, String exchange, String routingKey, IDictionary`2 arguments)
+   at Volo.Abp.RabbitMQ.RabbitMqMessageConsumer.TrySendQueueBindCommandsAsync()
+2024-07-12 14:37:57.688 +08:00 [FTL] Kon.AccountingService.HttpApi.Host terminated unexpectedly!
+Volo.Abp.AbpInitializationException: An error occurred during the initialize Volo.Abp.Modularity.OnPostApplicationInitializationModuleLifecycleContributor phase of the module Kon.AccountingService.AccountingServiceHttpApiHostModule, Kon.AccountingService.HttpApi.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null: An exception was thrown while activating Kon.AccountingService.DbMigrations.AccountingServiceDatabaseMigrationChecker.. See the inner exception for details.
+ ---> Autofac.Core.DependencyResolutionException: An exception was thrown while activating Kon.AccountingService.DbMigrations.AccountingServiceDatabaseMigrationChecker.
+ ---> Autofac.Core.DependencyResolutionException: None of the constructors found on type 'Kon.AccountingService.DbMigrations.AccountingServiceDatabaseMigrationChecker' can be invoked with the available services and parameters:
+Cannot resolve parameter 'System.String databaseName' of constructor 'Void .ctor(Volo.Abp.Uow.IUnitOfWorkManager, System.IServiceProvider, Volo.Abp.MultiTenancy.ICurrentTenant, Volo.Abp.EventBus.Distributed.IDistributedEventBus, Volo.Abp.DistributedLocking.IAbpDistributedLock, System.String)'.
+
+See https://autofac.rtfd.io/help/no-constructors-bindable for more info.
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.<>c__DisplayClass14_0.<UseSingleConstructorActivation>b__0(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Middleware.DelegateMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext context)
+   at Autofac.Core.Resolving.Middleware.DisposalTrackingMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext context)
+   at Autofac.Builder.RegistrationBuilder`3.<>c__DisplayClass41_0.<PropertiesAutowired>b__0(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Middleware.DelegateMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext context)
+   at Autofac.Builder.RegistrationBuilder`3.<>c__DisplayClass39_0.<OnActivated>b__0(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Middleware.CoreEventMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext context)
+   at Autofac.Core.Resolving.Middleware.ActivatorErrorHandlingMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   --- End of inner exception stack trace ---
+   at Autofac.Core.Resolving.Middleware.ActivatorErrorHandlingMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext context)
+   at Autofac.Core.Pipeline.ResolvePipeline.Invoke(ResolveRequestContext context)
+   at Autofac.Core.Resolving.Middleware.RegistrationPipelineInvokeMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext context)
+   at Autofac.Core.Resolving.Middleware.SharingMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext context)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext context)
+   at Autofac.Core.Resolving.Middleware.CircularDependencyDetectorMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext context)
+   at Autofac.Extensions.DependencyInjection.KeyedServiceMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext context)
+   at Autofac.Core.Pipeline.ResolvePipeline.Invoke(ResolveRequestContext context)
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, ResolveRequest& request)
+   at Autofac.Core.Resolving.ResolveOperation.ExecuteOperation(ResolveRequest& request)
+   at Autofac.Core.Resolving.ResolveOperation.Execute(ResolveRequest& request)
+   at Autofac.Core.Lifetime.LifetimeScope.ResolveComponent(ResolveRequest& request)
+   at Autofac.Core.Lifetime.LifetimeScope.Autofac.IComponentContext.ResolveComponent(ResolveRequest& request)
+   at Autofac.ResolutionExtensions.TryResolveService(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
+   at Autofac.ResolutionExtensions.ResolveService(IComponentContext context, Service service, IEnumerable`1 parameters)
+   at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Type serviceType, IEnumerable`1 parameters)
+   at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Type serviceType)
+   at Autofac.Extensions.DependencyInjection.AutofacServiceProvider.GetRequiredService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Kon.AccountingService.AccountingServiceHttpApiHostModule.OnPostApplicationInitializationAsync(ApplicationInitializationContext context) in C:\Users\Administrator\source\repos\kon1z\BillingBash\services\accounting\src\Kon.AccountingService.HttpApi.Host\AccountingServiceHttpApiHostModule.cs:line 108
+   at Volo.Abp.Modularity.OnPostApplicationInitializationModuleLifecycleContributor.InitializeAsync(ApplicationInitializationContext context, IAbpModule module)
+   at Volo.Abp.Modularity.ModuleManager.InitializeModulesAsync(ApplicationInitializationContext context)
+   --- End of inner exception stack trace ---
+   at Volo.Abp.Modularity.ModuleManager.InitializeModulesAsync(ApplicationInitializationContext context)
+   at Volo.Abp.AbpApplicationBase.InitializeModulesAsync()
+   at Volo.Abp.AbpApplicationWithExternalServiceProvider.InitializeAsync(IServiceProvider serviceProvider)
+   at Microsoft.AspNetCore.Builder.AbpApplicationBuilderExtensions.InitializeApplicationAsync(IApplicationBuilder app)
+   at Kon.AccountingService.Program.Main(String[] args) in C:\Users\Administrator\source\repos\kon1z\BillingBash\services\accounting\src\Kon.AccountingService.HttpApi.Host\Program.cs:line 29
+2024-07-12 14:39:27.236 +08:00 [INF] Starting Kon.AccountingService.HttpApi.Host.
+2024-07-12 14:39:30.301 +08:00 [INF] Loaded ABP modules:
+2024-07-12 14:39:30.302 +08:00 [INF] - Kon.AccountingService.AccountingServiceHttpApiHostModule
+2024-07-12 14:39:30.302 +08:00 [INF]   - Kon.BillingBash.Shared.Hosting.Microservices.BillingBashSharedHostingMicroservicesModule
+2024-07-12 14:39:30.302 +08:00 [INF]     - Kon.BillingBash.Shared.Hosting.AspNetCore.BillingBashSharedHostingAspNetCoreModule
+2024-07-12 14:39:30.302 +08:00 [INF]       - Kon.BillingBash.Shared.Hosting.BillingBashSharedHostingModule
+2024-07-12 14:39:30.302 +08:00 [INF]         - Volo.Abp.Autofac.AbpAutofacModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.Castle.AbpCastleCoreModule
+2024-07-12 14:39:30.302 +08:00 [INF]         - Volo.Abp.Data.AbpDataModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2024-07-12 14:39:30.302 +08:00 [INF]             - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2024-07-12 14:39:30.302 +08:00 [INF]             - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.Uow.AbpUnitOfWorkModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2024-07-12 14:39:30.302 +08:00 [INF]       - Kon.BillingBash.Shared.Localization.BillingBashSharedLocalizationModule
+2024-07-12 14:39:30.302 +08:00 [INF]         - Volo.Abp.Validation.AbpValidationModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.Localization.AbpLocalizationModule
+2024-07-12 14:39:30.302 +08:00 [INF]             - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2024-07-12 14:39:30.302 +08:00 [INF]             - Volo.Abp.Settings.AbpSettingsModule
+2024-07-12 14:39:30.302 +08:00 [INF]               - Volo.Abp.Security.AbpSecurityModule
+2024-07-12 14:39:30.302 +08:00 [INF]             - Volo.Abp.Threading.AbpThreadingModule
+2024-07-12 14:39:30.302 +08:00 [INF]       - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2024-07-12 14:39:30.302 +08:00 [INF]         - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.MultiTenancy.AbpMultiTenancyAbstractionsModule
+2024-07-12 14:39:30.302 +08:00 [INF]         - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.Auditing.AbpAuditingModule
+2024-07-12 14:39:30.302 +08:00 [INF]             - Volo.Abp.Json.AbpJsonModule
+2024-07-12 14:39:30.302 +08:00 [INF]               - Volo.Abp.Json.SystemTextJson.AbpJsonSystemTextJsonModule
+2024-07-12 14:39:30.302 +08:00 [INF]                 - Volo.Abp.Json.AbpJsonAbstractionsModule
+2024-07-12 14:39:30.302 +08:00 [INF]                 - Volo.Abp.Timing.AbpTimingModule
+2024-07-12 14:39:30.302 +08:00 [INF]             - Volo.Abp.Auditing.AbpAuditingContractsModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.Http.AbpHttpModule
+2024-07-12 14:39:30.302 +08:00 [INF]             - Volo.Abp.Http.AbpHttpAbstractionsModule
+2024-07-12 14:39:30.302 +08:00 [INF]             - Volo.Abp.Minify.AbpMinifyModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.Authorization.AbpAuthorizationModule
+2024-07-12 14:39:30.302 +08:00 [INF]             - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.AspNetCore.AbpAspNetCoreAbstractionsModule
+2024-07-12 14:39:30.302 +08:00 [INF]       - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2024-07-12 14:39:30.302 +08:00 [INF]         - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2024-07-12 14:39:30.302 +08:00 [INF]             - Volo.Abp.Application.AbpDddApplicationContractsModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2024-07-12 14:39:30.302 +08:00 [INF]             - Volo.Abp.UI.AbpUiModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.Application.AbpDddApplicationModule
+2024-07-12 14:39:30.302 +08:00 [INF]             - Volo.Abp.Domain.AbpDddDomainModule
+2024-07-12 14:39:30.302 +08:00 [INF]               - Volo.Abp.EventBus.AbpEventBusModule
+2024-07-12 14:39:30.302 +08:00 [INF]                 - Volo.Abp.Guids.AbpGuidsModule
+2024-07-12 14:39:30.302 +08:00 [INF]                 - Volo.Abp.BackgroundWorkers.AbpBackgroundWorkersModule
+2024-07-12 14:39:30.302 +08:00 [INF]                 - Volo.Abp.DistributedLocking.AbpDistributedLockingAbstractionsModule
+2024-07-12 14:39:30.302 +08:00 [INF]               - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2024-07-12 14:39:30.302 +08:00 [INF]               - Volo.Abp.Specifications.AbpSpecificationsModule
+2024-07-12 14:39:30.302 +08:00 [INF]               - Volo.Abp.Caching.AbpCachingModule
+2024-07-12 14:39:30.302 +08:00 [INF]                 - Volo.Abp.Serialization.AbpSerializationModule
+2024-07-12 14:39:30.302 +08:00 [INF]               - Volo.Abp.Domain.AbpDddDomainSharedModule
+2024-07-12 14:39:30.302 +08:00 [INF]             - Volo.Abp.Features.AbpFeaturesModule
+2024-07-12 14:39:30.302 +08:00 [INF]     - Kon.AdministrationService.EntityFrameworkCore.AdministrationServiceEntityFrameworkCoreModule
+2024-07-12 14:39:30.302 +08:00 [INF]       - Kon.AdministrationService.AdministrationServiceDomainModule
+2024-07-12 14:39:30.302 +08:00 [INF]         - Kon.AdministrationService.AdministrationServiceDomainSharedModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainSharedModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainSharedModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.Identity.AbpIdentityDomainSharedModule
+2024-07-12 14:39:30.302 +08:00 [INF]             - Volo.Abp.Users.AbpUsersDomainSharedModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.OpenIddict.AbpOpenIddictDomainSharedModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainSharedModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.SettingManagement.AbpSettingManagementDomainSharedModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.TenantManagement.AbpTenantManagementDomainSharedModule
+2024-07-12 14:39:30.302 +08:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2024-07-12 14:39:30.302 +08:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.BackgroundJobs.AbpBackgroundJobsModule
+2024-07-12 14:39:30.302 +08:00 [INF]             - Volo.Abp.BackgroundJobs.AbpBackgroundJobsAbstractionsModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.AutoMapper.AbpAutoMapperModule
+2024-07-12 14:39:30.302 +08:00 [INF]         - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainModule
+2024-07-12 14:39:30.302 +08:00 [INF]         - Volo.Abp.Identity.AbpIdentityDomainModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.Users.AbpUsersDomainModule
+2024-07-12 14:39:30.302 +08:00 [INF]             - Volo.Abp.Users.AbpUsersAbstractionModule
+2024-07-12 14:39:30.302 +08:00 [INF]         - Volo.Abp.OpenIddict.AbpOpenIddictDomainModule
+2024-07-12 14:39:30.302 +08:00 [INF]         - Volo.Abp.PermissionManagement.OpenIddict.AbpPermissionManagementDomainOpenIddictModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainModule
+2024-07-12 14:39:30.302 +08:00 [INF]         - Volo.Abp.PermissionManagement.Identity.AbpPermissionManagementDomainIdentityModule
+2024-07-12 14:39:30.302 +08:00 [INF]         - Volo.Abp.SettingManagement.AbpSettingManagementDomainModule
+2024-07-12 14:39:30.302 +08:00 [INF]         - Volo.Abp.TenantManagement.AbpTenantManagementDomainModule
+2024-07-12 14:39:30.302 +08:00 [INF]         - Volo.Abp.Emailing.AbpEmailingModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.TextTemplating.AbpTextTemplatingModule
+2024-07-12 14:39:30.302 +08:00 [INF]             - Volo.Abp.TextTemplating.Scriban.AbpTextTemplatingScribanModule
+2024-07-12 14:39:30.302 +08:00 [INF]               - Volo.Abp.TextTemplating.AbpTextTemplatingCoreModule
+2024-07-12 14:39:30.302 +08:00 [INF]       - Volo.Abp.Identity.EntityFrameworkCore.AbpIdentityEntityFrameworkCoreModule
+2024-07-12 14:39:30.302 +08:00 [INF]         - Volo.Abp.Users.EntityFrameworkCore.AbpUsersEntityFrameworkCoreModule
+2024-07-12 14:39:30.302 +08:00 [INF]           - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2024-07-12 14:39:30.302 +08:00 [INF]       - Volo.Abp.OpenIddict.EntityFrameworkCore.AbpOpenIddictEntityFrameworkCoreModule
+2024-07-12 14:39:30.302 +08:00 [INF]       - Volo.Abp.PermissionManagement.EntityFrameworkCore.AbpPermissionManagementEntityFrameworkCoreModule
+2024-07-12 14:39:30.302 +08:00 [INF]       - Volo.Abp.SettingManagement.EntityFrameworkCore.AbpSettingManagementEntityFrameworkCoreModule
+2024-07-12 14:39:30.302 +08:00 [INF]       - Volo.Abp.EntityFrameworkCore.PostgreSql.AbpEntityFrameworkCorePostgreSqlModule
+2024-07-12 14:39:30.302 +08:00 [INF]       - Volo.Abp.BackgroundJobs.EntityFrameworkCore.AbpBackgroundJobsEntityFrameworkCoreModule
+2024-07-12 14:39:30.302 +08:00 [INF]       - Volo.Abp.AuditLogging.EntityFrameworkCore.AbpAuditLoggingEntityFrameworkCoreModule
+2024-07-12 14:39:30.302 +08:00 [INF]       - Volo.Abp.TenantManagement.EntityFrameworkCore.AbpTenantManagementEntityFrameworkCoreModule
+2024-07-12 14:39:30.302 +08:00 [INF]       - Volo.Abp.FeatureManagement.EntityFrameworkCore.AbpFeatureManagementEntityFrameworkCoreModule
+2024-07-12 14:39:30.302 +08:00 [INF]     - Volo.Abp.BackgroundJobs.RabbitMQ.AbpBackgroundJobsRabbitMqModule
+2024-07-12 14:39:30.302 +08:00 [INF]       - Volo.Abp.RabbitMQ.AbpRabbitMqModule
+2024-07-12 14:39:30.302 +08:00 [INF]     - Volo.Abp.AspNetCore.Authentication.JwtBearer.AbpAspNetCoreAuthenticationJwtBearerModule
+2024-07-12 14:39:30.302 +08:00 [INF]     - Volo.Abp.EventBus.RabbitMq.AbpEventBusRabbitMqModule
+2024-07-12 14:39:30.302 +08:00 [INF]     - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2024-07-12 14:39:30.302 +08:00 [INF]     - Volo.Abp.DistributedLocking.AbpDistributedLockingModule
+2024-07-12 14:39:30.302 +08:00 [INF]   - Kon.AccountingService.AccountingServiceApplicationModule
+2024-07-12 14:39:30.302 +08:00 [INF]     - Kon.AccountingService.AccountingServiceDomainModule
+2024-07-12 14:39:30.302 +08:00 [INF]       - Kon.AccountingService.AccountingServiceDomainSharedModule
+2024-07-12 14:39:30.302 +08:00 [INF]     - Kon.AccountingService.AccountingServiceApplicationContractsModule
+2024-07-12 14:39:30.302 +08:00 [INF]   - Kon.AccountingService.AccountingServiceHttpApiModule
+2024-07-12 14:39:30.302 +08:00 [INF]   - Kon.AccountingService.EntityFrameworkCore.AccountingServiceEntityFrameworkCoreModule
+2024-07-12 14:39:30.418 +08:00 [DBG] Started background worker: Volo.Abp.OpenIddict.Tokens.TokenCleanupBackgroundWorker
+2024-07-12 14:39:30.685 +08:00 [WRN] Value cannot be null. (Parameter 'chars')
+System.ArgumentNullException: Value cannot be null. (Parameter 'chars')
+   at System.Text.UTF8Encoding.GetByteCount(String chars)
+   at RabbitMQ.Client.Framing.Impl.ExchangeDeclare.GetRequiredBufferSize()
+   at RabbitMQ.Client.Impl.OutgoingCommand.GetMaxSize(Int32 maxPayloadBytes)
+   at RabbitMQ.Client.Impl.OutgoingCommand.Transmit(UInt16 channelNumber, Connection connection)
+   at RabbitMQ.Client.Impl.SessionBase.Transmit(OutgoingCommand& cmd)
+   at RabbitMQ.Client.Impl.ModelBase.TransmitAndEnqueue(OutgoingCommand& cmd, IRpcContinuation k)
+   at RabbitMQ.Client.Impl.ModelBase.ModelRpc(MethodBase method, ContentHeaderBase header, Byte[] body)
+   at RabbitMQ.Client.Framing.Impl.Model._Private_ExchangeDeclare(String exchange, String type, Boolean passive, Boolean durable, Boolean autoDelete, Boolean internal, Boolean nowait, IDictionary`2 arguments)
+   at RabbitMQ.Client.Impl.ModelBase.ExchangeDeclare(String exchange, String type, Boolean durable, Boolean autoDelete, IDictionary`2 arguments)
+   at RabbitMQ.Client.Impl.AutorecoveringModel.ExchangeDeclare(String exchange, String type, Boolean durable, Boolean autoDelete, IDictionary`2 arguments)
+   at Volo.Abp.RabbitMQ.RabbitMqMessageConsumer.TryCreateChannelAsync()
+2024-07-12 14:39:30.706 +08:00 [WRN] Object reference not set to an instance of an object.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at RabbitMQ.Client.Impl.RecordedBinding.GetHashCode()
+   at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at RabbitMQ.Client.Framing.Impl.AutorecoveringConnection.RecordBinding(RecordedBinding rb)
+   at RabbitMQ.Client.Impl.AutorecoveringModel.QueueBind(String queue, String exchange, String routingKey, IDictionary`2 arguments)
+   at RabbitMQ.Client.IModelExensions.QueueBind(IModel model, String queue, String exchange, String routingKey, IDictionary`2 arguments)
+   at Volo.Abp.RabbitMQ.RabbitMqMessageConsumer.TrySendQueueBindCommandsAsync()
+2024-07-12 14:39:31.268 +08:00 [FTL] Kon.AccountingService.HttpApi.Host terminated unexpectedly!
+Volo.Abp.AbpInitializationException: An error occurred during the initialize Volo.Abp.Modularity.OnPostApplicationInitializationModuleLifecycleContributor phase of the module Kon.AccountingService.AccountingServiceHttpApiHostModule, Kon.AccountingService.HttpApi.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null: An exception was thrown while activating Kon.AccountingService.DbMigrations.AccountingServiceDatabaseMigrationChecker.. See the inner exception for details.
+ ---> Autofac.Core.DependencyResolutionException: An exception was thrown while activating Kon.AccountingService.DbMigrations.AccountingServiceDatabaseMigrationChecker.
+ ---> Autofac.Core.DependencyResolutionException: None of the constructors found on type 'Kon.AccountingService.DbMigrations.AccountingServiceDatabaseMigrationChecker' can be invoked with the available services and parameters:
+Cannot resolve parameter 'System.String databaseName' of constructor 'Void .ctor(Volo.Abp.Uow.IUnitOfWorkManager, System.IServiceProvider, Volo.Abp.MultiTenancy.ICurrentTenant, Volo.Abp.EventBus.Distributed.IDistributedEventBus, Volo.Abp.DistributedLocking.IAbpDistributedLock, System.String)'.
+
+See https://autofac.rtfd.io/help/no-constructors-bindable for more info.
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.<>c__DisplayClass14_0.<UseSingleConstructorActivation>b__0(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Middleware.DelegateMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext context)
+   at Autofac.Core.Resolving.Middleware.DisposalTrackingMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext context)
+   at Autofac.Builder.RegistrationBuilder`3.<>c__DisplayClass41_0.<PropertiesAutowired>b__0(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Middleware.DelegateMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext context)
+   at Autofac.Builder.RegistrationBuilder`3.<>c__DisplayClass39_0.<OnActivated>b__0(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Middleware.CoreEventMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext context)
+   at Autofac.Core.Resolving.Middleware.ActivatorErrorHandlingMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   --- End of inner exception stack trace ---
+   at Autofac.Core.Resolving.Middleware.ActivatorErrorHandlingMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext context)
+   at Autofac.Core.Pipeline.ResolvePipeline.Invoke(ResolveRequestContext context)
+   at Autofac.Core.Resolving.Middleware.RegistrationPipelineInvokeMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext context)
+   at Autofac.Core.Resolving.Middleware.SharingMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext context)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext context)
+   at Autofac.Core.Resolving.Middleware.CircularDependencyDetectorMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext context)
+   at Autofac.Extensions.DependencyInjection.KeyedServiceMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext context)
+   at Autofac.Core.Pipeline.ResolvePipeline.Invoke(ResolveRequestContext context)
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, ResolveRequest& request)
+   at Autofac.Core.Resolving.ResolveOperation.ExecuteOperation(ResolveRequest& request)
+   at Autofac.Core.Resolving.ResolveOperation.Execute(ResolveRequest& request)
+   at Autofac.Core.Lifetime.LifetimeScope.ResolveComponent(ResolveRequest& request)
+   at Autofac.Core.Lifetime.LifetimeScope.Autofac.IComponentContext.ResolveComponent(ResolveRequest& request)
+   at Autofac.ResolutionExtensions.TryResolveService(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
+   at Autofac.ResolutionExtensions.ResolveService(IComponentContext context, Service service, IEnumerable`1 parameters)
+   at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Type serviceType, IEnumerable`1 parameters)
+   at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Type serviceType)
+   at Autofac.Extensions.DependencyInjection.AutofacServiceProvider.GetRequiredService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Kon.AccountingService.AccountingServiceHttpApiHostModule.OnPostApplicationInitializationAsync(ApplicationInitializationContext context) in C:\Users\Administrator\source\repos\kon1z\BillingBash\services\accounting\src\Kon.AccountingService.HttpApi.Host\AccountingServiceHttpApiHostModule.cs:line 115
+   at Volo.Abp.Modularity.OnPostApplicationInitializationModuleLifecycleContributor.InitializeAsync(ApplicationInitializationContext context, IAbpModule module)
+   at Volo.Abp.Modularity.ModuleManager.InitializeModulesAsync(ApplicationInitializationContext context)
+   --- End of inner exception stack trace ---
+   at Volo.Abp.Modularity.ModuleManager.InitializeModulesAsync(ApplicationInitializationContext context)
+   at Volo.Abp.AbpApplicationBase.InitializeModulesAsync()
+   at Volo.Abp.AbpApplicationWithExternalServiceProvider.InitializeAsync(IServiceProvider serviceProvider)
+   at Microsoft.AspNetCore.Builder.AbpApplicationBuilderExtensions.InitializeApplicationAsync(IApplicationBuilder app)
+   at Kon.AccountingService.Program.Main(String[] args) in C:\Users\Administrator\source\repos\kon1z\BillingBash\services\accounting\src\Kon.AccountingService.HttpApi.Host\Program.cs:line 29

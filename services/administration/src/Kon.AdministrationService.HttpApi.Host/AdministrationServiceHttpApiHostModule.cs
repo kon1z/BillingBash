@@ -1,217 +1,121 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Medallion.Threading;
-using Medallion.Threading.Redis;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Kon.AdministrationService.DbMigrations;
+using Kon.AdministrationService.EntityFrameworkCore;
+using Kon.BillingBash.Shared.Hosting.AspNetCore;
+using Kon.BillingBash.Shared.Hosting.Microservices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Kon.AdministrationService.EntityFrameworkCore;
-using Kon.AdministrationService.MultiTenancy;
-using StackExchange.Redis;
-using Microsoft.OpenApi.Models;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
-using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
-using Volo.Abp.AspNetCore.Serilog;
-using Volo.Abp.Autofac;
-using Volo.Abp.Caching;
-using Volo.Abp.Caching.StackExchangeRedis;
-using Volo.Abp.DistributedLocking;
-using Volo.Abp.Identity;
-using Volo.Abp.Localization;
+using Volo.Abp.AspNetCore.Mvc.AntiForgery;
+using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Modularity;
-using Volo.Abp.Security.Claims;
-using Volo.Abp.Swashbuckle;
-using Volo.Abp.VirtualFileSystem;
 
 namespace Kon.AdministrationService;
 
 [DependsOn(
     typeof(AdministrationServiceHttpApiModule),
-    typeof(AbpAutofacModule),
-    typeof(AbpCachingStackExchangeRedisModule),
-    typeof(AbpDistributedLockingModule),
-    typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
     typeof(AdministrationServiceApplicationModule),
     typeof(AdministrationServiceEntityFrameworkCoreModule),
-    typeof(AbpAspNetCoreSerilogModule),
-    typeof(AbpSwashbuckleModule)
+    typeof(BillingBashSharedHostingMicroservicesModule)
 )]
 public class AdministrationServiceHttpApiHostModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        var configuration = context.Services.GetConfiguration();
-        var hostingEnvironment = context.Services.GetHostingEnvironment();
+	{
+#if DEBUG
+		Configure<AbpBackgroundJobOptions>(options =>
+		{
+			options.IsJobExecutionEnabled = false;
+		});
+#endif
 
-        ConfigureConventionalControllers();
-        ConfigureAuthentication(context, configuration);
-        ConfigureCache(configuration);
-        ConfigureVirtualFileSystem(context);
-        ConfigureDataProtection(context, configuration, hostingEnvironment);
-        ConfigureDistributedLocking(context, configuration);
-        ConfigureCors(context, configuration);
-        ConfigureSwaggerServices(context, configuration);
-    }
+		var configuration = context.Services.GetConfiguration();
+		JwtBearerConfigurationHelper.Configure(context, "AdministrationService");
 
-    private void ConfigureCache(IConfiguration configuration)
-    {
-        Configure<AbpDistributedCacheOptions>(options => { options.KeyPrefix = "AdministrationService:"; });
-    }
+		SwaggerConfigurationHelper.ConfigureWithOidc(
+			context: context,
+			authority: configuration["AuthServer:Authority"]!,
+			scopes: ["AdministrationService"],
+			discoveryEndpoint: configuration["AuthServer:MetadataAddress"],
+			apiTitle: "Administration Service API"
+		);
 
-    private void ConfigureVirtualFileSystem(ServiceConfigurationContext context)
-    {
-        var hostingEnvironment = context.Services.GetHostingEnvironment();
+		context.Services.AddCors(options =>
+		{
+			options.AddDefaultPolicy(builder =>
+			{
+				builder
+					.WithOrigins(
+						configuration["App:CorsOrigins"]!
+							.Split(",", StringSplitOptions.RemoveEmptyEntries)
+							.Select(o => o.Trim().RemovePostFix("/"))
+							.ToArray()
+					)
+					.WithAbpExposedHeaders()
+					.SetIsOriginAllowedToAllowWildcardSubdomains()
+					.AllowAnyHeader()
+					.AllowAnyMethod()
+					.AllowCredentials();
+			});
+		});
 
-        if (hostingEnvironment.IsDevelopment())
-        {
-            Configure<AbpVirtualFileSystemOptions>(options =>
-            {
-                options.FileSets.ReplaceEmbeddedByPhysical<AdministrationServiceDomainSharedModule>(
-                    Path.Combine(hostingEnvironment.ContentRootPath,
-                        $"..{Path.DirectorySeparatorChar}Kon.AdministrationService.Domain.Shared"));
-                options.FileSets.ReplaceEmbeddedByPhysical<AdministrationServiceDomainModule>(
-                    Path.Combine(hostingEnvironment.ContentRootPath,
-                        $"..{Path.DirectorySeparatorChar}Kon.AdministrationService.Domain"));
-                options.FileSets.ReplaceEmbeddedByPhysical<AdministrationServiceApplicationContractsModule>(
-                    Path.Combine(hostingEnvironment.ContentRootPath,
-                        $"..{Path.DirectorySeparatorChar}Kon.AdministrationService.Application.Contracts"));
-                options.FileSets.ReplaceEmbeddedByPhysical<AdministrationServiceApplicationModule>(
-                    Path.Combine(hostingEnvironment.ContentRootPath,
-                        $"..{Path.DirectorySeparatorChar}Kon.AdministrationService.Application"));
-            });
-        }
-    }
+		Configure<AbpAspNetCoreMvcOptions>(options =>
+		{
+			options.ConventionalControllers.Create(typeof(AdministrationServiceApplicationModule).Assembly, opts =>
+			{
+				opts.RootPath = "administration";
+				opts.RemoteServiceName = "administration";
+			});
+		});
 
-    private void ConfigureConventionalControllers()
-    {
-        Configure<AbpAspNetCoreMvcOptions>(options =>
-        {
-            options.ConventionalControllers.Create(typeof(AdministrationServiceApplicationModule).Assembly);
-        });
-    }
+		Configure<AbpAntiForgeryOptions>(options =>
+		{
+			options.AutoValidate = false;
+		});
+	}
 
-    private void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
-    {
-        context.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
-            {
-                options.Authority = configuration["AuthServer:Authority"];
-                options.RequireHttpsMetadata = configuration.GetValue<bool>("AuthServer:RequireHttpsMetadata");
-                options.Audience = "AdministrationService";
-            });
+	public override void OnApplicationInitialization(ApplicationInitializationContext context)
+	{
+		var app = context.GetApplicationBuilder();
+		var env = context.GetEnvironment();
 
-        context.Services.Configure<AbpClaimsPrincipalFactoryOptions>(options =>
-        {
-            options.IsDynamicClaimsEnabled = true;
-        });
-    }
+		if (env.IsDevelopment())
+		{
+			app.UseDeveloperExceptionPage();
+		}
 
-    private static void ConfigureSwaggerServices(ServiceConfigurationContext context, IConfiguration configuration)
-    {
-        context.Services.AddAbpSwaggerGenWithOAuth(
-            configuration["AuthServer:Authority"]!,
-            new Dictionary<string, string>
-            {
-                    {"AdministrationService", "AdministrationService API"}
-            },
-            options =>
-            {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "AdministrationService API", Version = "v1" });
-                options.DocInclusionPredicate((docName, description) => true);
-                options.CustomSchemaIds(type => type.FullName);
-            });
-    }
+		app.UseCorrelationId();
+		app.UseCors();
+		app.UseAbpRequestLocalization();
+		app.UseStaticFiles();
+		app.UseRouting();
+		app.UseAuthentication();
+		app.UseAbpClaimsMap();
+		app.UseAuthorization();
+		app.UseSwagger();
+		app.UseAbpSwaggerWithCustomScriptUI(options =>
+		{
+			var configuration = context.ServiceProvider.GetRequiredService<IConfiguration>();
+			options.SwaggerEndpoint("/swagger/v1/swagger.json", "Administration Service API");
+			options.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
+		});
+		app.UseAbpSerilogEnrichers();
+		app.UseAuditing();
+		app.UseUnitOfWork();
+		app.UseConfiguredEndpoints();
+	}
+	public override async Task OnPostApplicationInitializationAsync(ApplicationInitializationContext context)
+	{
+		await context.ServiceProvider
+			.GetRequiredService<AdministrationServiceDatabaseMigrationChecker>()
+			.CheckAndApplyDatabaseMigrationsAsync();
+	}
 
-    private void ConfigureDataProtection(
-        ServiceConfigurationContext context,
-        IConfiguration configuration,
-        IWebHostEnvironment hostingEnvironment)
-    {
-        var dataProtectionBuilder = context.Services.AddDataProtection().SetApplicationName("AdministrationService");
-        if (!hostingEnvironment.IsDevelopment())
-        {
-            var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]!);
-            dataProtectionBuilder.PersistKeysToStackExchangeRedis(redis, "AdministrationService-Protection-Keys");
-        }
-    }
-
-    private void ConfigureDistributedLocking(
-        ServiceConfigurationContext context,
-        IConfiguration configuration)
-    {
-        context.Services.AddSingleton<IDistributedLockProvider>(sp =>
-        {
-            var connection = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]!);
-            return new RedisDistributedSynchronizationProvider(connection.GetDatabase());
-        });
-    }
-
-    private void ConfigureCors(ServiceConfigurationContext context, IConfiguration configuration)
-    {
-        context.Services.AddCors(options =>
-        {
-            options.AddDefaultPolicy(builder =>
-            {
-                builder
-                    .WithOrigins(configuration["App:CorsOrigins"]?
-                        .Split(",", StringSplitOptions.RemoveEmptyEntries)
-                        .Select(o => o.RemovePostFix("/"))
-                        .ToArray() ?? Array.Empty<string>())
-                    .WithAbpExposedHeaders()
-                    .SetIsOriginAllowedToAllowWildcardSubdomains()
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials();
-            });
-        });
-    }
-
-    public override void OnApplicationInitialization(ApplicationInitializationContext context)
-    {
-        var app = context.GetApplicationBuilder();
-        var env = context.GetEnvironment();
-
-        if (env.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
-        }
-
-        app.UseAbpRequestLocalization();
-        app.UseCorrelationId();
-        app.UseStaticFiles();
-        app.UseRouting();
-        app.UseCors();
-        app.UseAuthentication();
-
-        if (MultiTenancyConsts.IsEnabled)
-        {
-            app.UseMultiTenancy();
-        }
-
-        app.UseUnitOfWork();
-        app.UseDynamicClaims();
-        app.UseAuthorization();
-
-        app.UseSwagger();
-        app.UseAbpSwaggerUI(options =>
-        {
-            options.SwaggerEndpoint("/swagger/v1/swagger.json", "AdministrationService API");
-
-            var configuration = context.GetConfiguration();
-            options.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
-            options.OAuthScopes("AdministrationService");
-        });
-
-        app.UseAuditing();
-        app.UseAbpSerilogEnrichers();
-        app.UseConfiguredEndpoints();
-    }
 }

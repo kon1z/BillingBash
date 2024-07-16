@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.AntiForgery;
+using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Modularity;
 
 namespace Kon.AccountingService;
@@ -27,8 +28,14 @@ public class AccountingServiceHttpApiHostModule : AbpModule
 {
 	public override void ConfigureServices(ServiceConfigurationContext context)
 	{
-		var configuration = context.Services.GetConfiguration();
+#if DEBUG
+		Configure<AbpBackgroundJobOptions>(options =>
+		{
+			options.IsJobExecutionEnabled = false;
+		});
+#endif
 
+		var configuration = context.Services.GetConfiguration();
 		JwtBearerConfigurationHelper.Configure(context, "AccountingService");
 
 		SwaggerConfigurationHelper.ConfigureWithOidc(

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using Kon.BillingBash.Shared.Hosting.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using Serilog.Events;
+using System;
+using System.Threading.Tasks;
 
 namespace Kon.AdministrationService;
 
@@ -12,45 +12,33 @@ public class Program
 {
     public static async Task<int> Main(string[] args)
     {
-        Log.Logger = new LoggerConfiguration()
-#if DEBUG
-            .MinimumLevel.Debug()
-#else
-            .MinimumLevel.Information()
-#endif
-            .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-            .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
-            .Enrich.FromLogContext()
-            .WriteTo.Async(c => c.File("Logs/logs.txt"))
-            .WriteTo.Async(c => c.Console())
-            .CreateLogger();
+	    var assemblyName = typeof(Program).Assembly.GetName().Name!;
+	    SerilogConfigurationHelper.Configure(assemblyName);
 
-        try
-        {
-            Log.Information("Starting Kon.AdministrationService.HttpApi.Host.");
-            var builder = WebApplication.CreateBuilder(args);
-            builder.Host.AddAppSettingsSecretsJson()
-                .UseAutofac()
-                .UseSerilog();
-            await builder.AddApplicationAsync<AdministrationServiceHttpApiHostModule>();
-            var app = builder.Build();
-            await app.InitializeApplicationAsync();
-            await app.RunAsync();
-            return 0;
-        }
-        catch (Exception ex)
-        {
-            if (ex is HostAbortedException)
-            {
-                throw;
-            }
+	    try
+	    {
+		    Log.Information($"Starting {assemblyName}.");
 
-            Log.Fatal(ex, "Host terminated unexpectedly!");
-            return 1;
-        }
-        finally
-        {
-            Log.CloseAndFlush();
-        }
+		    var builder = WebApplication.CreateBuilder(args);
+		    builder.Host
+			    .UseAutofac()
+			    .UseSerilog();
+		    await builder.AddApplicationAsync<AdministrationServiceHttpApiHostModule>();
+
+		    var app = builder.Build();
+		    await app.InitializeApplicationAsync();
+		    await app.RunAsync();
+
+		    return 0;
+	    }
+	    catch (Exception ex)
+	    {
+		    Log.Fatal(ex, $"{assemblyName} terminated unexpectedly!");
+		    return 1;
+	    }
+	    finally
+	    {
+		    await Log.CloseAndFlushAsync();
+	    }
     }
 }
