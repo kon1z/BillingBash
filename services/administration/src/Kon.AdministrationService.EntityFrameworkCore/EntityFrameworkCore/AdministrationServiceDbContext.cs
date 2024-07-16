@@ -12,7 +12,7 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 
 namespace Kon.AdministrationService.EntityFrameworkCore;
 
-[ConnectionStringName("Default")]
+[ConnectionStringName(AdministrationServiceConstants.ConnectionStringName)]
 public class AdministrationServiceDbContext :
 	AbpDbContext<AdministrationServiceDbContext>, IPermissionManagementDbContext,
 	ISettingManagementDbContext,
